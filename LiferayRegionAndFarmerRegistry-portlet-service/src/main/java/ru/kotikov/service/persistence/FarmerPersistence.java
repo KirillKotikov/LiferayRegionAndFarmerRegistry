@@ -549,4 +549,193 @@ public interface FarmerPersistence extends BasePersistence<Farmer> {
     */
     public int countAll()
         throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Returns all the regions associated with the farmer.
+    *
+    * @param pk the primary key of the farmer
+    * @return the regions associated with the farmer
+    * @throws SystemException if a system exception occurred
+    */
+    public java.util.List<ru.kotikov.model.Region> getRegions(long pk)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Returns a range of all the regions associated with the farmer.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ru.kotikov.model.impl.FarmerModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * </p>
+    *
+    * @param pk the primary key of the farmer
+    * @param start the lower bound of the range of farmers
+    * @param end the upper bound of the range of farmers (not inclusive)
+    * @return the range of regions associated with the farmer
+    * @throws SystemException if a system exception occurred
+    */
+    public java.util.List<ru.kotikov.model.Region> getRegions(long pk,
+        int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Returns an ordered range of all the regions associated with the farmer.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ru.kotikov.model.impl.FarmerModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+    * </p>
+    *
+    * @param pk the primary key of the farmer
+    * @param start the lower bound of the range of farmers
+    * @param end the upper bound of the range of farmers (not inclusive)
+    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+    * @return the ordered range of regions associated with the farmer
+    * @throws SystemException if a system exception occurred
+    */
+    public java.util.List<ru.kotikov.model.Region> getRegions(long pk,
+        int start, int end,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Returns the number of regions associated with the farmer.
+    *
+    * @param pk the primary key of the farmer
+    * @return the number of regions associated with the farmer
+    * @throws SystemException if a system exception occurred
+    */
+    public int getRegionsSize(long pk)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Returns <code>true</code> if the region is associated with the farmer.
+    *
+    * @param pk the primary key of the farmer
+    * @param regionPK the primary key of the region
+    * @return <code>true</code> if the region is associated with the farmer; <code>false</code> otherwise
+    * @throws SystemException if a system exception occurred
+    */
+    public boolean containsRegion(long pk, long regionPK)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Returns <code>true</code> if the farmer has any regions associated with it.
+    *
+    * @param pk the primary key of the farmer to check for associations with regions
+    * @return <code>true</code> if the farmer has any regions associated with it; <code>false</code> otherwise
+    * @throws SystemException if a system exception occurred
+    */
+    public boolean containsRegions(long pk)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Adds an association between the farmer and the region. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+    *
+    * @param pk the primary key of the farmer
+    * @param regionPK the primary key of the region
+    * @throws SystemException if a system exception occurred
+    */
+    public void addRegion(long pk, long regionPK)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Adds an association between the farmer and the region. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+    *
+    * @param pk the primary key of the farmer
+    * @param region the region
+    * @throws SystemException if a system exception occurred
+    */
+    public void addRegion(long pk, ru.kotikov.model.Region region)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Adds an association between the farmer and the regions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+    *
+    * @param pk the primary key of the farmer
+    * @param regionPKs the primary keys of the regions
+    * @throws SystemException if a system exception occurred
+    */
+    public void addRegions(long pk, long[] regionPKs)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Adds an association between the farmer and the regions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+    *
+    * @param pk the primary key of the farmer
+    * @param regions the regions
+    * @throws SystemException if a system exception occurred
+    */
+    public void addRegions(long pk,
+        java.util.List<ru.kotikov.model.Region> regions)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Clears all associations between the farmer and its regions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+    *
+    * @param pk the primary key of the farmer to clear the associated regions from
+    * @throws SystemException if a system exception occurred
+    */
+    public void clearRegions(long pk)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Removes the association between the farmer and the region. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+    *
+    * @param pk the primary key of the farmer
+    * @param regionPK the primary key of the region
+    * @throws SystemException if a system exception occurred
+    */
+    public void removeRegion(long pk, long regionPK)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Removes the association between the farmer and the region. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+    *
+    * @param pk the primary key of the farmer
+    * @param region the region
+    * @throws SystemException if a system exception occurred
+    */
+    public void removeRegion(long pk, ru.kotikov.model.Region region)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Removes the association between the farmer and the regions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+    *
+    * @param pk the primary key of the farmer
+    * @param regionPKs the primary keys of the regions
+    * @throws SystemException if a system exception occurred
+    */
+    public void removeRegions(long pk, long[] regionPKs)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Removes the association between the farmer and the regions. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+    *
+    * @param pk the primary key of the farmer
+    * @param regions the regions
+    * @throws SystemException if a system exception occurred
+    */
+    public void removeRegions(long pk,
+        java.util.List<ru.kotikov.model.Region> regions)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Sets the regions associated with the farmer, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+    *
+    * @param pk the primary key of the farmer
+    * @param regionPKs the primary keys of the regions to be associated with the farmer
+    * @throws SystemException if a system exception occurred
+    */
+    public void setRegions(long pk, long[] regionPKs)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Sets the regions associated with the farmer, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+    *
+    * @param pk the primary key of the farmer
+    * @param regions the regions to be associated with the farmer
+    * @throws SystemException if a system exception occurred
+    */
+    public void setRegions(long pk,
+        java.util.List<ru.kotikov.model.Region> regions)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

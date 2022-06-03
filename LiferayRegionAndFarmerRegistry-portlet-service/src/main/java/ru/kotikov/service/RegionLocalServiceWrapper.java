@@ -238,6 +238,157 @@ public class RegionLocalServiceWrapper implements RegionLocalService,
     }
 
     /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public void addFarmerRegion(long farmerId, long regionId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        _regionLocalService.addFarmerRegion(farmerId, regionId);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public void addFarmerRegion(long farmerId, ru.kotikov.model.Region region)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        _regionLocalService.addFarmerRegion(farmerId, region);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public void addFarmerRegions(long farmerId, long[] regionIds)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        _regionLocalService.addFarmerRegions(farmerId, regionIds);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public void addFarmerRegions(long farmerId,
+        java.util.List<ru.kotikov.model.Region> Regions)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        _regionLocalService.addFarmerRegions(farmerId, Regions);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public void clearFarmerRegions(long farmerId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        _regionLocalService.clearFarmerRegions(farmerId);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public void deleteFarmerRegion(long farmerId, long regionId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        _regionLocalService.deleteFarmerRegion(farmerId, regionId);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public void deleteFarmerRegion(long farmerId, ru.kotikov.model.Region region)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        _regionLocalService.deleteFarmerRegion(farmerId, region);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public void deleteFarmerRegions(long farmerId, long[] regionIds)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        _regionLocalService.deleteFarmerRegions(farmerId, regionIds);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public void deleteFarmerRegions(long farmerId,
+        java.util.List<ru.kotikov.model.Region> Regions)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        _regionLocalService.deleteFarmerRegions(farmerId, Regions);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public java.util.List<ru.kotikov.model.Region> getFarmerRegions(
+        long farmerId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _regionLocalService.getFarmerRegions(farmerId);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public java.util.List<ru.kotikov.model.Region> getFarmerRegions(
+        long farmerId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _regionLocalService.getFarmerRegions(farmerId, start, end);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public java.util.List<ru.kotikov.model.Region> getFarmerRegions(
+        long farmerId, int start, int end,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _regionLocalService.getFarmerRegions(farmerId, start, end,
+            orderByComparator);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public int getFarmerRegionsCount(long farmerId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _regionLocalService.getFarmerRegionsCount(farmerId);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public boolean hasFarmerRegion(long farmerId, long regionId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _regionLocalService.hasFarmerRegion(farmerId, regionId);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public boolean hasFarmerRegions(long farmerId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _regionLocalService.hasFarmerRegions(farmerId);
+    }
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Override
+    public void setFarmerRegions(long farmerId, long[] regionIds)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        _regionLocalService.setFarmerRegions(farmerId, regionIds);
+    }
+
+    /**
     * Returns the Spring bean ID for this bean.
     *
     * @return the Spring bean ID for this bean
@@ -262,6 +413,20 @@ public class RegionLocalServiceWrapper implements RegionLocalService,
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable {
         return _regionLocalService.invokeMethod(name, parameterTypes, arguments);
+    }
+
+    @Override
+    public java.util.List<ru.kotikov.model.Region> getByRegionName(
+        java.lang.String name)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _regionLocalService.getByRegionName(name);
+    }
+
+    @Override
+    public java.util.List<ru.kotikov.model.Region> getByRegionArchiveStatus(
+        boolean archive)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _regionLocalService.getByRegionArchiveStatus(archive);
     }
 
     /**

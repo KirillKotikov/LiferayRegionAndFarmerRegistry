@@ -33,9 +33,6 @@
 			<basic name="farmerRegistrationRegionId">
 				<column name="FARMER_REGISTRATION_REGION_ID" />
 			</basic>
-			<basic name="farmerFieldRegionsId">
-				<column name="FARMER_FIELD_REGIONS_ID" />
-			</basic>
 			<basic name="farmerRegistrationDate">
 				<column name="FARMER_REGISTRATION_DATE" />
 				<temporal>TIMESTAMP</temporal>

@@ -3,11 +3,16 @@
 
 <liferay-portlet-app>
 	<portlet>
-		<portlet-name>LiferayRegionAndFarmerRegistry</portlet-name>
+		<portlet-name>RegionsRegistry</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
-	</portlet>
+	</portlet><portlet>
+	<portlet-name>FarmersRegistry</portlet-name>
+	<icon>/icon.png</icon>
+	<header-portlet-css>/css/main.css</header-portlet-css>
+	<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
+</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

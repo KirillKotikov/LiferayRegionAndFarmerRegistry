@@ -1,6 +1,10 @@
 package ru.kotikov.service.impl;
 
+import com.liferay.portal.kernel.exception.SystemException;
+import ru.kotikov.model.Farmer;
 import ru.kotikov.service.base.FarmerLocalServiceBaseImpl;
+
+import java.util.List;
 
 /**
  * The implementation of the farmer local service.
@@ -22,4 +26,11 @@ public class FarmerLocalServiceImpl extends FarmerLocalServiceBaseImpl {
      *
      * Never reference this interface directly. Always use {@link ru.kotikov.service.FarmerLocalServiceUtil} to access the farmer local service.
      */
+    public List<Farmer> getByFarmerName(String name) throws SystemException {
+        return farmerPersistence.findByFarmerName(name);
+    }
+
+    public List<Farmer> getByFarmerArchiveStatus(boolean archive) throws SystemException {
+        return farmerPersistence.findByFarmerArchiveStatus(archive);
+    }
 }

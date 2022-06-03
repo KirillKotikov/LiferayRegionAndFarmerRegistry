@@ -1,5 +1,7 @@
 package portlets;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -15,12 +17,12 @@ public class RegionsPortlet extends MVCPortlet {
     public void addRegion(ActionRequest request, ActionResponse response) {
 
         try {
-            Region region = RegionLocalServiceUtil.createRegion(RegionLocalServiceUtil.getRegionsCount() + 1);
+            Region region = RegionLocalServiceUtil.createRegion(CounterLocalServiceUtil.increment());
             region.setRegionName(ParamUtil.getString(request, "regionName"));
             region.setRegionCode(ParamUtil.getLong(request, "regionCode"));
             region.setRegionArchiveStatus(ParamUtil.getBoolean(request, "archiveStatus"));
             RegionLocalServiceUtil.addRegion(region);
-            response.setRenderParameter("jspPage", "/html/regions/regionsView.jsp");
+            response.setRenderParameter("jspPage", "/regionsView.jsp");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -30,21 +32,23 @@ public class RegionsPortlet extends MVCPortlet {
         Region region = RegionLocalServiceUtil.getRegion(ParamUtil.getLong(request, "regionId"));
         region.setRegionName(ParamUtil.getString(request, "regionName"));
         region.setRegionCode(ParamUtil.getLong(request, "regionCode"));
-        region.setRegionArchiveStatus(ParamUtil.getBoolean(request, "archiveStatus"));
         RegionLocalServiceUtil.updateRegion(region);
-        response.setRenderParameter("jspPage", "/html/regions/regionsView.jsp");
+        response.setRenderParameter("jspPage", "/regionsView.jsp");
     }
 
     public void changeRegionArchiveStatus(ActionRequest request, ActionResponse response) throws SystemException, PortalException {
         Region currentRegion = RegionLocalServiceUtil.getRegion(Long.parseLong(request.getParameter("currentRegionId")));
         currentRegion.setRegionArchiveStatus(!request.getParameter("currentRegionArchiveStatus").equals("true"));
         RegionLocalServiceUtil.updateRegion(currentRegion);
-        response.setRenderParameter("jspPage", "/html/regions/regionsView.jsp");
+        if (currentRegion.getRegionArchiveStatus())
+            response.setRenderParameter("jspPage", "/regionsView.jsp");
+        else response.setRenderParameter("jspPage", "/html/regions/archive.jsp");
+
     }
 
     public void getCurrentRegion(ActionRequest request, ActionResponse response) throws SystemException, PortalException {
         Region currentRegion = RegionLocalServiceUtil.getRegion(Long.parseLong(request.getParameter("currentRegionId")));
         request.setAttribute("currentRegion", currentRegion);
-        response.setRenderParameter("jspPage", "/html/regions/updateRegion.jsp");
+        response.setRenderParameter("jspPage", "/html/regions/updateFarmer.jsp");
     }
 }

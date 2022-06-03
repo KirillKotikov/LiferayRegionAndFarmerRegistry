@@ -1,5 +1,6 @@
 package ru.kotikov.service.persistence;
 
+import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
@@ -26,6 +27,8 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.service.persistence.impl.TableMapper;
+import com.liferay.portal.service.persistence.impl.TableMapperFactory;
 
 import ru.kotikov.NoSuchRegionException;
 
@@ -33,12 +36,14 @@ import ru.kotikov.model.Region;
 import ru.kotikov.model.impl.RegionImpl;
 import ru.kotikov.model.impl.RegionModelImpl;
 
+import ru.kotikov.service.persistence.FarmerPersistence;
 import ru.kotikov.service.persistence.RegionPersistence;
 
 import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -158,7 +163,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
     private static Log _log = LogFactoryUtil.getLog(RegionPersistenceImpl.class);
     private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
                 "uuid", "regionId", "regionName", "regionCode",
-                "regionArchiveStatus"
+                "regionArchiveStatus", "regionsFarmers"
             });
     private static Region _nullRegion = new RegionImpl() {
             @Override
@@ -178,6 +183,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
                 return _nullRegion;
             }
         };
+
+    @BeanReference(type = FarmerPersistence.class)
+    protected FarmerPersistence farmerPersistence;
+    protected TableMapper<Region, ru.kotikov.model.Farmer> regionToFarmerTableMapper;
 
     public RegionPersistenceImpl() {
         setModelClass(Region.class);
@@ -1759,6 +1768,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
     protected Region removeImpl(Region region) throws SystemException {
         region = toUnwrappedModel(region);
 
+        regionToFarmerTableMapper.deleteLeftPrimaryKeyTableMappings(region.getPrimaryKey());
+
         Session session = null;
 
         try {
@@ -2163,6 +2174,279 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
         return count.intValue();
     }
 
+    /**
+     * Returns all the farmers associated with the region.
+     *
+     * @param pk the primary key of the region
+     * @return the farmers associated with the region
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<ru.kotikov.model.Farmer> getFarmers(long pk)
+        throws SystemException {
+        return getFarmers(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+    }
+
+    /**
+     * Returns a range of all the farmers associated with the region.
+     *
+     * <p>
+     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ru.kotikov.model.impl.RegionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+     * </p>
+     *
+     * @param pk the primary key of the region
+     * @param start the lower bound of the range of regions
+     * @param end the upper bound of the range of regions (not inclusive)
+     * @return the range of farmers associated with the region
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<ru.kotikov.model.Farmer> getFarmers(long pk, int start, int end)
+        throws SystemException {
+        return getFarmers(pk, start, end, null);
+    }
+
+    /**
+     * Returns an ordered range of all the farmers associated with the region.
+     *
+     * <p>
+     * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link ru.kotikov.model.impl.RegionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+     * </p>
+     *
+     * @param pk the primary key of the region
+     * @param start the lower bound of the range of regions
+     * @param end the upper bound of the range of regions (not inclusive)
+     * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+     * @return the ordered range of farmers associated with the region
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<ru.kotikov.model.Farmer> getFarmers(long pk, int start,
+        int end, OrderByComparator orderByComparator) throws SystemException {
+        return regionToFarmerTableMapper.getRightBaseModels(pk, start, end,
+            orderByComparator);
+    }
+
+    /**
+     * Returns the number of farmers associated with the region.
+     *
+     * @param pk the primary key of the region
+     * @return the number of farmers associated with the region
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public int getFarmersSize(long pk) throws SystemException {
+        long[] pks = regionToFarmerTableMapper.getRightPrimaryKeys(pk);
+
+        return pks.length;
+    }
+
+    /**
+     * Returns <code>true</code> if the farmer is associated with the region.
+     *
+     * @param pk the primary key of the region
+     * @param farmerPK the primary key of the farmer
+     * @return <code>true</code> if the farmer is associated with the region; <code>false</code> otherwise
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public boolean containsFarmer(long pk, long farmerPK)
+        throws SystemException {
+        return regionToFarmerTableMapper.containsTableMapping(pk, farmerPK);
+    }
+
+    /**
+     * Returns <code>true</code> if the region has any farmers associated with it.
+     *
+     * @param pk the primary key of the region to check for associations with farmers
+     * @return <code>true</code> if the region has any farmers associated with it; <code>false</code> otherwise
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public boolean containsFarmers(long pk) throws SystemException {
+        if (getFarmersSize(pk) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Adds an association between the region and the farmer. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+     *
+     * @param pk the primary key of the region
+     * @param farmerPK the primary key of the farmer
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void addFarmer(long pk, long farmerPK) throws SystemException {
+        regionToFarmerTableMapper.addTableMapping(pk, farmerPK);
+    }
+
+    /**
+     * Adds an association between the region and the farmer. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+     *
+     * @param pk the primary key of the region
+     * @param farmer the farmer
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void addFarmer(long pk, ru.kotikov.model.Farmer farmer)
+        throws SystemException {
+        regionToFarmerTableMapper.addTableMapping(pk, farmer.getPrimaryKey());
+    }
+
+    /**
+     * Adds an association between the region and the farmers. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+     *
+     * @param pk the primary key of the region
+     * @param farmerPKs the primary keys of the farmers
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void addFarmers(long pk, long[] farmerPKs) throws SystemException {
+        for (long farmerPK : farmerPKs) {
+            regionToFarmerTableMapper.addTableMapping(pk, farmerPK);
+        }
+    }
+
+    /**
+     * Adds an association between the region and the farmers. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+     *
+     * @param pk the primary key of the region
+     * @param farmers the farmers
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void addFarmers(long pk, List<ru.kotikov.model.Farmer> farmers)
+        throws SystemException {
+        for (ru.kotikov.model.Farmer farmer : farmers) {
+            regionToFarmerTableMapper.addTableMapping(pk, farmer.getPrimaryKey());
+        }
+    }
+
+    /**
+     * Clears all associations between the region and its farmers. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+     *
+     * @param pk the primary key of the region to clear the associated farmers from
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void clearFarmers(long pk) throws SystemException {
+        regionToFarmerTableMapper.deleteLeftPrimaryKeyTableMappings(pk);
+    }
+
+    /**
+     * Removes the association between the region and the farmer. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+     *
+     * @param pk the primary key of the region
+     * @param farmerPK the primary key of the farmer
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void removeFarmer(long pk, long farmerPK) throws SystemException {
+        regionToFarmerTableMapper.deleteTableMapping(pk, farmerPK);
+    }
+
+    /**
+     * Removes the association between the region and the farmer. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+     *
+     * @param pk the primary key of the region
+     * @param farmer the farmer
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void removeFarmer(long pk, ru.kotikov.model.Farmer farmer)
+        throws SystemException {
+        regionToFarmerTableMapper.deleteTableMapping(pk, farmer.getPrimaryKey());
+    }
+
+    /**
+     * Removes the association between the region and the farmers. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+     *
+     * @param pk the primary key of the region
+     * @param farmerPKs the primary keys of the farmers
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void removeFarmers(long pk, long[] farmerPKs)
+        throws SystemException {
+        for (long farmerPK : farmerPKs) {
+            regionToFarmerTableMapper.deleteTableMapping(pk, farmerPK);
+        }
+    }
+
+    /**
+     * Removes the association between the region and the farmers. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+     *
+     * @param pk the primary key of the region
+     * @param farmers the farmers
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void removeFarmers(long pk, List<ru.kotikov.model.Farmer> farmers)
+        throws SystemException {
+        for (ru.kotikov.model.Farmer farmer : farmers) {
+            regionToFarmerTableMapper.deleteTableMapping(pk,
+                farmer.getPrimaryKey());
+        }
+    }
+
+    /**
+     * Sets the farmers associated with the region, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+     *
+     * @param pk the primary key of the region
+     * @param farmerPKs the primary keys of the farmers to be associated with the region
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void setFarmers(long pk, long[] farmerPKs) throws SystemException {
+        Set<Long> newFarmerPKsSet = SetUtil.fromArray(farmerPKs);
+        Set<Long> oldFarmerPKsSet = SetUtil.fromArray(regionToFarmerTableMapper.getRightPrimaryKeys(
+                    pk));
+
+        Set<Long> removeFarmerPKsSet = new HashSet<Long>(oldFarmerPKsSet);
+
+        removeFarmerPKsSet.removeAll(newFarmerPKsSet);
+
+        for (long removeFarmerPK : removeFarmerPKsSet) {
+            regionToFarmerTableMapper.deleteTableMapping(pk, removeFarmerPK);
+        }
+
+        newFarmerPKsSet.removeAll(oldFarmerPKsSet);
+
+        for (long newFarmerPK : newFarmerPKsSet) {
+            regionToFarmerTableMapper.addTableMapping(pk, newFarmerPK);
+        }
+    }
+
+    /**
+     * Sets the farmers associated with the region, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+     *
+     * @param pk the primary key of the region
+     * @param farmers the farmers to be associated with the region
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void setFarmers(long pk, List<ru.kotikov.model.Farmer> farmers)
+        throws SystemException {
+        try {
+            long[] farmerPKs = new long[farmers.size()];
+
+            for (int i = 0; i < farmers.size(); i++) {
+                ru.kotikov.model.Farmer farmer = farmers.get(i);
+
+                farmerPKs[i] = farmer.getPrimaryKey();
+            }
+
+            setFarmers(pk, farmerPKs);
+        } catch (Exception e) {
+            throw processException(e);
+        } finally {
+            FinderCacheUtil.clearCache(RegionModelImpl.MAPPING_TABLE_ENTITY_REGIONS_FARMERS_NAME);
+        }
+    }
+
     @Override
     protected Set<String> getBadColumnNames() {
         return _badColumnNames;
@@ -2190,6 +2474,9 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
                 _log.error(e);
             }
         }
+
+        regionToFarmerTableMapper = TableMapperFactory.getTableMapper("entity_regions_farmers",
+                "region_id", "farmer_id", this, farmerPersistence);
     }
 
     public void destroy() {
@@ -2197,5 +2484,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
         FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
         FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
         FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+        TableMapperFactory.removeTableMapper("entity_regions_farmers");
     }
 }

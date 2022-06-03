@@ -53,11 +53,10 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
             { "farmer_kpp", Types.BIGINT },
             { "farmer_ogrn", Types.BIGINT },
             { "farmer_registration_region_id", Types.BIGINT },
-            { "farmer_field_regions_id", Types.VARCHAR },
             { "farmer_registration_date", Types.TIMESTAMP },
             { "farmer_archive_status", Types.BOOLEAN }
         };
-    public static final String TABLE_SQL_CREATE = "create table entity_Farmer (uuid_ VARCHAR(75) null,farmer_id LONG not null primary key,farmer_name VARCHAR(75) null,farmer_legal_form VARCHAR(75) null,farmer_inn LONG,farmer_kpp LONG,farmer_ogrn LONG,farmer_registration_region_id LONG,farmer_field_regions_id VARCHAR(75) null,farmer_registration_date DATE null,farmer_archive_status BOOLEAN)";
+    public static final String TABLE_SQL_CREATE = "create table entity_Farmer (uuid_ VARCHAR(75) null,farmer_id LONG not null primary key,farmer_name VARCHAR(75) null,farmer_legal_form VARCHAR(75) null,farmer_inn LONG,farmer_kpp LONG,farmer_ogrn LONG,farmer_registration_region_id LONG,farmer_registration_date DATE null,farmer_archive_status BOOLEAN)";
     public static final String TABLE_SQL_DROP = "drop table entity_Farmer";
     public static final String ORDER_BY_JPQL = " ORDER BY farmer.farmerName ASC";
     public static final String ORDER_BY_SQL = " ORDER BY entity_Farmer.farmer_name ASC";
@@ -76,6 +75,15 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
     public static long FARMERARCHIVESTATUS_COLUMN_BITMASK = 1L;
     public static long FARMERNAME_COLUMN_BITMASK = 2L;
     public static long UUID_COLUMN_BITMASK = 4L;
+    public static final String MAPPING_TABLE_ENTITY_REGIONS_FARMERS_NAME = "entity_regions_farmers";
+    public static final Object[][] MAPPING_TABLE_ENTITY_REGIONS_FARMERS_COLUMNS = {
+            { "farmer_id", Types.BIGINT },
+            { "region_id", Types.BIGINT }
+        };
+    public static final String MAPPING_TABLE_ENTITY_REGIONS_FARMERS_SQL_CREATE = "create table entity_regions_farmers (farmer_id LONG not null,region_id LONG not null,primary key (farmer_id, region_id))";
+    public static final boolean FINDER_CACHE_ENABLED_ENTITY_REGIONS_FARMERS = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+                "value.object.finder.cache.enabled.entity_regions_farmers"),
+            true);
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.ru.kotikov.model.Farmer"));
     private static ClassLoader _classLoader = Farmer.class.getClassLoader();
@@ -90,7 +98,6 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
     private long _farmerKpp;
     private long _farmerOgrn;
     private Long _farmerRegistrationRegionId;
-    private String _farmerFieldRegionsId;
     private Date _farmerRegistrationDate;
     private boolean _farmerArchiveStatus;
     private boolean _originalFarmerArchiveStatus;
@@ -144,7 +151,6 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
         attributes.put("farmerOgrn", getFarmerOgrn());
         attributes.put("farmerRegistrationRegionId",
             getFarmerRegistrationRegionId());
-        attributes.put("farmerFieldRegionsId", getFarmerFieldRegionsId());
         attributes.put("farmerRegistrationDate", getFarmerRegistrationDate());
         attributes.put("farmerArchiveStatus", getFarmerArchiveStatus());
 
@@ -200,13 +206,6 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
 
         if (farmerRegistrationRegionId != null) {
             setFarmerRegistrationRegionId(farmerRegistrationRegionId);
-        }
-
-        String farmerFieldRegionsId = (String) attributes.get(
-                "farmerFieldRegionsId");
-
-        if (farmerFieldRegionsId != null) {
-            setFarmerFieldRegionsId(farmerFieldRegionsId);
         }
 
         Date farmerRegistrationDate = (Date) attributes.get(
@@ -335,20 +334,6 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
     }
 
     @Override
-    public String getFarmerFieldRegionsId() {
-        if (_farmerFieldRegionsId == null) {
-            return StringPool.BLANK;
-        } else {
-            return _farmerFieldRegionsId;
-        }
-    }
-
-    @Override
-    public void setFarmerFieldRegionsId(String farmerFieldRegionsId) {
-        _farmerFieldRegionsId = farmerFieldRegionsId;
-    }
-
-    @Override
     public Date getFarmerRegistrationDate() {
         return _farmerRegistrationDate;
     }
@@ -424,7 +409,6 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
         farmerImpl.setFarmerKpp(getFarmerKpp());
         farmerImpl.setFarmerOgrn(getFarmerOgrn());
         farmerImpl.setFarmerRegistrationRegionId(getFarmerRegistrationRegionId());
-        farmerImpl.setFarmerFieldRegionsId(getFarmerFieldRegionsId());
         farmerImpl.setFarmerRegistrationDate(getFarmerRegistrationDate());
         farmerImpl.setFarmerArchiveStatus(getFarmerArchiveStatus());
 
@@ -525,15 +509,6 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
 
         farmerCacheModel.farmerRegistrationRegionId = getFarmerRegistrationRegionId();
 
-        farmerCacheModel.farmerFieldRegionsId = getFarmerFieldRegionsId();
-
-        String farmerFieldRegionsId = farmerCacheModel.farmerFieldRegionsId;
-
-        if ((farmerFieldRegionsId != null) &&
-                (farmerFieldRegionsId.length() == 0)) {
-            farmerCacheModel.farmerFieldRegionsId = null;
-        }
-
         Date farmerRegistrationDate = getFarmerRegistrationDate();
 
         if (farmerRegistrationDate != null) {
@@ -549,7 +524,7 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(23);
+        StringBundler sb = new StringBundler(21);
 
         sb.append("{uuid=");
         sb.append(getUuid());
@@ -567,8 +542,6 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
         sb.append(getFarmerOgrn());
         sb.append(", farmerRegistrationRegionId=");
         sb.append(getFarmerRegistrationRegionId());
-        sb.append(", farmerFieldRegionsId=");
-        sb.append(getFarmerFieldRegionsId());
         sb.append(", farmerRegistrationDate=");
         sb.append(getFarmerRegistrationDate());
         sb.append(", farmerArchiveStatus=");
@@ -580,7 +553,7 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(37);
+        StringBundler sb = new StringBundler(34);
 
         sb.append("<model><model-name>");
         sb.append("ru.kotikov.model.Farmer");
@@ -617,10 +590,6 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
         sb.append(
             "<column><column-name>farmerRegistrationRegionId</column-name><column-value><![CDATA[");
         sb.append(getFarmerRegistrationRegionId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>farmerFieldRegionsId</column-name><column-value><![CDATA[");
-        sb.append(getFarmerFieldRegionsId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>farmerRegistrationDate</column-name><column-value><![CDATA[");

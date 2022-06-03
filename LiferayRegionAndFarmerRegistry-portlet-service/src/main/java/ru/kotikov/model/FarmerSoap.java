@@ -21,7 +21,6 @@ public class FarmerSoap implements Serializable {
     private long _farmerKpp;
     private long _farmerOgrn;
     private Long _farmerRegistrationRegionId;
-    private String _farmerFieldRegionsId;
     private Date _farmerRegistrationDate;
     private boolean _farmerArchiveStatus;
 
@@ -39,7 +38,6 @@ public class FarmerSoap implements Serializable {
         soapModel.setFarmerKpp(model.getFarmerKpp());
         soapModel.setFarmerOgrn(model.getFarmerOgrn());
         soapModel.setFarmerRegistrationRegionId(model.getFarmerRegistrationRegionId());
-        soapModel.setFarmerFieldRegionsId(model.getFarmerFieldRegionsId());
         soapModel.setFarmerRegistrationDate(model.getFarmerRegistrationDate());
         soapModel.setFarmerArchiveStatus(model.getFarmerArchiveStatus());
 
@@ -152,14 +150,6 @@ public class FarmerSoap implements Serializable {
 
     public void setFarmerRegistrationRegionId(Long farmerRegistrationRegionId) {
         _farmerRegistrationRegionId = farmerRegistrationRegionId;
-    }
-
-    public String getFarmerFieldRegionsId() {
-        return _farmerFieldRegionsId;
-    }
-
-    public void setFarmerFieldRegionsId(String farmerFieldRegionsId) {
-        _farmerFieldRegionsId = farmerFieldRegionsId;
     }
 
     public Date getFarmerRegistrationDate() {

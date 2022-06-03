@@ -29,13 +29,12 @@ public class FarmerCacheModel implements CacheModel<Farmer>, Externalizable {
     public long farmerKpp;
     public long farmerOgrn;
     public Long farmerRegistrationRegionId;
-    public String farmerFieldRegionsId;
     public long farmerRegistrationDate;
     public boolean farmerArchiveStatus;
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(23);
+        StringBundler sb = new StringBundler(21);
 
         sb.append("{uuid=");
         sb.append(uuid);
@@ -53,8 +52,6 @@ public class FarmerCacheModel implements CacheModel<Farmer>, Externalizable {
         sb.append(farmerOgrn);
         sb.append(", farmerRegistrationRegionId=");
         sb.append(farmerRegistrationRegionId);
-        sb.append(", farmerFieldRegionsId=");
-        sb.append(farmerFieldRegionsId);
         sb.append(", farmerRegistrationDate=");
         sb.append(farmerRegistrationDate);
         sb.append(", farmerArchiveStatus=");
@@ -93,12 +90,6 @@ public class FarmerCacheModel implements CacheModel<Farmer>, Externalizable {
         farmerImpl.setFarmerOgrn(farmerOgrn);
         farmerImpl.setFarmerRegistrationRegionId(farmerRegistrationRegionId);
 
-        if (farmerFieldRegionsId == null) {
-            farmerImpl.setFarmerFieldRegionsId(StringPool.BLANK);
-        } else {
-            farmerImpl.setFarmerFieldRegionsId(farmerFieldRegionsId);
-        }
-
         if (farmerRegistrationDate == Long.MIN_VALUE) {
             farmerImpl.setFarmerRegistrationDate(null);
         } else {
@@ -123,7 +114,6 @@ public class FarmerCacheModel implements CacheModel<Farmer>, Externalizable {
         farmerKpp = objectInput.readLong();
         farmerOgrn = objectInput.readLong();
         farmerRegistrationRegionId = objectInput.readLong();
-        farmerFieldRegionsId = objectInput.readUTF();
         farmerRegistrationDate = objectInput.readLong();
         farmerArchiveStatus = objectInput.readBoolean();
     }
@@ -155,13 +145,6 @@ public class FarmerCacheModel implements CacheModel<Farmer>, Externalizable {
         objectOutput.writeLong(farmerKpp);
         objectOutput.writeLong(farmerOgrn);
         objectOutput.writeLong(farmerRegistrationRegionId);
-
-        if (farmerFieldRegionsId == null) {
-            objectOutput.writeUTF(StringPool.BLANK);
-        } else {
-            objectOutput.writeUTF(farmerFieldRegionsId);
-        }
-
         objectOutput.writeLong(farmerRegistrationDate);
         objectOutput.writeBoolean(farmerArchiveStatus);
     }

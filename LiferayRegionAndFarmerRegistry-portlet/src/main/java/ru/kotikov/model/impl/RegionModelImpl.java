@@ -69,6 +69,15 @@ public class RegionModelImpl extends BaseModelImpl<Region>
     public static long REGIONARCHIVESTATUS_COLUMN_BITMASK = 1L;
     public static long REGIONNAME_COLUMN_BITMASK = 2L;
     public static long UUID_COLUMN_BITMASK = 4L;
+    public static final String MAPPING_TABLE_ENTITY_REGIONS_FARMERS_NAME = "entity_regions_farmers";
+    public static final Object[][] MAPPING_TABLE_ENTITY_REGIONS_FARMERS_COLUMNS = {
+            { "farmer_id", Types.BIGINT },
+            { "region_id", Types.BIGINT }
+        };
+    public static final String MAPPING_TABLE_ENTITY_REGIONS_FARMERS_SQL_CREATE = "create table entity_regions_farmers (farmer_id LONG not null,region_id LONG not null,primary key (farmer_id, region_id))";
+    public static final boolean FINDER_CACHE_ENABLED_ENTITY_REGIONS_FARMERS = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+                "value.object.finder.cache.enabled.entity_regions_farmers"),
+            true);
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.ru.kotikov.model.Region"));
     private static ClassLoader _classLoader = Region.class.getClassLoader();

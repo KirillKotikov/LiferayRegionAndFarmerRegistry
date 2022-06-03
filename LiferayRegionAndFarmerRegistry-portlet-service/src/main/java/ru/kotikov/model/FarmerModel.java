@@ -161,21 +161,6 @@ public interface FarmerModel extends BaseModel<Farmer> {
     public void setFarmerRegistrationRegionId(Long farmerRegistrationRegionId);
 
     /**
-     * Returns the farmer field regions ID of this farmer.
-     *
-     * @return the farmer field regions ID of this farmer
-     */
-    @AutoEscape
-    public String getFarmerFieldRegionsId();
-
-    /**
-     * Sets the farmer field regions ID of this farmer.
-     *
-     * @param farmerFieldRegionsId the farmer field regions ID of this farmer
-     */
-    public void setFarmerFieldRegionsId(String farmerFieldRegionsId);
-
-    /**
      * Returns the farmer registration date of this farmer.
      *
      * @return the farmer registration date of this farmer

@@ -41,10 +41,46 @@ public class FarmerLocalServiceClpInvoker {
     private String[] _methodParameterTypes14;
     private String _methodName15;
     private String[] _methodParameterTypes15;
-    private String _methodName36;
-    private String[] _methodParameterTypes36;
-    private String _methodName37;
-    private String[] _methodParameterTypes37;
+    private String _methodName16;
+    private String[] _methodParameterTypes16;
+    private String _methodName17;
+    private String[] _methodParameterTypes17;
+    private String _methodName18;
+    private String[] _methodParameterTypes18;
+    private String _methodName19;
+    private String[] _methodParameterTypes19;
+    private String _methodName20;
+    private String[] _methodParameterTypes20;
+    private String _methodName21;
+    private String[] _methodParameterTypes21;
+    private String _methodName22;
+    private String[] _methodParameterTypes22;
+    private String _methodName23;
+    private String[] _methodParameterTypes23;
+    private String _methodName24;
+    private String[] _methodParameterTypes24;
+    private String _methodName25;
+    private String[] _methodParameterTypes25;
+    private String _methodName26;
+    private String[] _methodParameterTypes26;
+    private String _methodName27;
+    private String[] _methodParameterTypes27;
+    private String _methodName28;
+    private String[] _methodParameterTypes28;
+    private String _methodName29;
+    private String[] _methodParameterTypes29;
+    private String _methodName30;
+    private String[] _methodParameterTypes30;
+    private String _methodName31;
+    private String[] _methodParameterTypes31;
+    private String _methodName52;
+    private String[] _methodParameterTypes52;
+    private String _methodName53;
+    private String[] _methodParameterTypes53;
+    private String _methodName58;
+    private String[] _methodParameterTypes58;
+    private String _methodName59;
+    private String[] _methodParameterTypes59;
 
     public FarmerLocalServiceClpInvoker() {
         _methodName0 = "addFarmer";
@@ -123,13 +159,88 @@ public class FarmerLocalServiceClpInvoker {
 
         _methodParameterTypes15 = new String[] { "ru.kotikov.model.Farmer" };
 
-        _methodName36 = "getBeanIdentifier";
+        _methodName16 = "addRegionFarmer";
 
-        _methodParameterTypes36 = new String[] {  };
+        _methodParameterTypes16 = new String[] { "long", "long" };
 
-        _methodName37 = "setBeanIdentifier";
+        _methodName17 = "addRegionFarmer";
 
-        _methodParameterTypes37 = new String[] { "java.lang.String" };
+        _methodParameterTypes17 = new String[] { "long", "ru.kotikov.model.Farmer" };
+
+        _methodName18 = "addRegionFarmers";
+
+        _methodParameterTypes18 = new String[] { "long", "long[][]" };
+
+        _methodName19 = "addRegionFarmers";
+
+        _methodParameterTypes19 = new String[] { "long", "java.util.List" };
+
+        _methodName20 = "clearRegionFarmers";
+
+        _methodParameterTypes20 = new String[] { "long" };
+
+        _methodName21 = "deleteRegionFarmer";
+
+        _methodParameterTypes21 = new String[] { "long", "long" };
+
+        _methodName22 = "deleteRegionFarmer";
+
+        _methodParameterTypes22 = new String[] { "long", "ru.kotikov.model.Farmer" };
+
+        _methodName23 = "deleteRegionFarmers";
+
+        _methodParameterTypes23 = new String[] { "long", "long[][]" };
+
+        _methodName24 = "deleteRegionFarmers";
+
+        _methodParameterTypes24 = new String[] { "long", "java.util.List" };
+
+        _methodName25 = "getRegionFarmers";
+
+        _methodParameterTypes25 = new String[] { "long" };
+
+        _methodName26 = "getRegionFarmers";
+
+        _methodParameterTypes26 = new String[] { "long", "int", "int" };
+
+        _methodName27 = "getRegionFarmers";
+
+        _methodParameterTypes27 = new String[] {
+                "long", "int", "int",
+                "com.liferay.portal.kernel.util.OrderByComparator"
+            };
+
+        _methodName28 = "getRegionFarmersCount";
+
+        _methodParameterTypes28 = new String[] { "long" };
+
+        _methodName29 = "hasRegionFarmer";
+
+        _methodParameterTypes29 = new String[] { "long", "long" };
+
+        _methodName30 = "hasRegionFarmers";
+
+        _methodParameterTypes30 = new String[] { "long" };
+
+        _methodName31 = "setRegionFarmers";
+
+        _methodParameterTypes31 = new String[] { "long", "long[][]" };
+
+        _methodName52 = "getBeanIdentifier";
+
+        _methodParameterTypes52 = new String[] {  };
+
+        _methodName53 = "setBeanIdentifier";
+
+        _methodParameterTypes53 = new String[] { "java.lang.String" };
+
+        _methodName58 = "getByFarmerName";
+
+        _methodParameterTypes58 = new String[] { "java.lang.String" };
+
+        _methodName59 = "getByFarmerArchiveStatus";
+
+        _methodParameterTypes59 = new String[] { "boolean" };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -221,16 +332,141 @@ public class FarmerLocalServiceClpInvoker {
             return FarmerLocalServiceUtil.updateFarmer((ru.kotikov.model.Farmer) arguments[0]);
         }
 
-        if (_methodName36.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes36, parameterTypes)) {
+        if (_methodName16.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes16, parameterTypes)) {
+            FarmerLocalServiceUtil.addRegionFarmer(((Long) arguments[0]).longValue(),
+                ((Long) arguments[1]).longValue());
+
+            return null;
+        }
+
+        if (_methodName17.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes17, parameterTypes)) {
+            FarmerLocalServiceUtil.addRegionFarmer(((Long) arguments[0]).longValue(),
+                (ru.kotikov.model.Farmer) arguments[1]);
+
+            return null;
+        }
+
+        if (_methodName18.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes18, parameterTypes)) {
+            FarmerLocalServiceUtil.addRegionFarmers(((Long) arguments[0]).longValue(),
+                (long[]) arguments[1]);
+
+            return null;
+        }
+
+        if (_methodName19.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes19, parameterTypes)) {
+            FarmerLocalServiceUtil.addRegionFarmers(((Long) arguments[0]).longValue(),
+                (java.util.List<ru.kotikov.model.Farmer>) arguments[1]);
+
+            return null;
+        }
+
+        if (_methodName20.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes20, parameterTypes)) {
+            FarmerLocalServiceUtil.clearRegionFarmers(((Long) arguments[0]).longValue());
+
+            return null;
+        }
+
+        if (_methodName21.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes21, parameterTypes)) {
+            FarmerLocalServiceUtil.deleteRegionFarmer(((Long) arguments[0]).longValue(),
+                ((Long) arguments[1]).longValue());
+
+            return null;
+        }
+
+        if (_methodName22.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes22, parameterTypes)) {
+            FarmerLocalServiceUtil.deleteRegionFarmer(((Long) arguments[0]).longValue(),
+                (ru.kotikov.model.Farmer) arguments[1]);
+
+            return null;
+        }
+
+        if (_methodName23.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes23, parameterTypes)) {
+            FarmerLocalServiceUtil.deleteRegionFarmers(((Long) arguments[0]).longValue(),
+                (long[]) arguments[1]);
+
+            return null;
+        }
+
+        if (_methodName24.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes24, parameterTypes)) {
+            FarmerLocalServiceUtil.deleteRegionFarmers(((Long) arguments[0]).longValue(),
+                (java.util.List<ru.kotikov.model.Farmer>) arguments[1]);
+
+            return null;
+        }
+
+        if (_methodName25.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes25, parameterTypes)) {
+            return FarmerLocalServiceUtil.getRegionFarmers(((Long) arguments[0]).longValue());
+        }
+
+        if (_methodName26.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes26, parameterTypes)) {
+            return FarmerLocalServiceUtil.getRegionFarmers(((Long) arguments[0]).longValue(),
+                ((Integer) arguments[1]).intValue(),
+                ((Integer) arguments[2]).intValue());
+        }
+
+        if (_methodName27.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes27, parameterTypes)) {
+            return FarmerLocalServiceUtil.getRegionFarmers(((Long) arguments[0]).longValue(),
+                ((Integer) arguments[1]).intValue(),
+                ((Integer) arguments[2]).intValue(),
+                (com.liferay.portal.kernel.util.OrderByComparator) arguments[3]);
+        }
+
+        if (_methodName28.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes28, parameterTypes)) {
+            return FarmerLocalServiceUtil.getRegionFarmersCount(((Long) arguments[0]).longValue());
+        }
+
+        if (_methodName29.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes29, parameterTypes)) {
+            return FarmerLocalServiceUtil.hasRegionFarmer(((Long) arguments[0]).longValue(),
+                ((Long) arguments[1]).longValue());
+        }
+
+        if (_methodName30.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes30, parameterTypes)) {
+            return FarmerLocalServiceUtil.hasRegionFarmers(((Long) arguments[0]).longValue());
+        }
+
+        if (_methodName31.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
+            FarmerLocalServiceUtil.setRegionFarmers(((Long) arguments[0]).longValue(),
+                (long[]) arguments[1]);
+
+            return null;
+        }
+
+        if (_methodName52.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
             return FarmerLocalServiceUtil.getBeanIdentifier();
         }
 
-        if (_methodName37.equals(name) &&
-                Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
+        if (_methodName53.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
             FarmerLocalServiceUtil.setBeanIdentifier((java.lang.String) arguments[0]);
 
             return null;
+        }
+
+        if (_methodName58.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+            return FarmerLocalServiceUtil.getByFarmerName((java.lang.String) arguments[0]);
+        }
+
+        if (_methodName59.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+            return FarmerLocalServiceUtil.getByFarmerArchiveStatus(((Boolean) arguments[0]).booleanValue());
         }
 
         throw new UnsupportedOperationException();

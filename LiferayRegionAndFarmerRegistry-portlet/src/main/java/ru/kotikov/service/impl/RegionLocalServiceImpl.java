@@ -1,6 +1,10 @@
 package ru.kotikov.service.impl;
 
+import com.liferay.portal.kernel.exception.SystemException;
+import ru.kotikov.model.Region;
 import ru.kotikov.service.base.RegionLocalServiceBaseImpl;
+
+import java.util.List;
 
 /**
  * The implementation of the region local service.
@@ -22,4 +26,11 @@ public class RegionLocalServiceImpl extends RegionLocalServiceBaseImpl {
      *
      * Never reference this interface directly. Always use {@link ru.kotikov.service.RegionLocalServiceUtil} to access the region local service.
      */
+    public List<Region> getByRegionName(String name) throws SystemException {
+        return regionPersistence.findByRegionName(name);
+    }
+
+    public List<Region> getByRegionArchiveStatus(boolean archive) throws SystemException {
+        return regionPersistence.findByRegionArchiveStatus(archive);
+    }
 }

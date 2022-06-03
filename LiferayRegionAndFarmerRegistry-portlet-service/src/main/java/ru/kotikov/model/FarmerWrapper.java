@@ -46,7 +46,6 @@ public class FarmerWrapper implements Farmer, ModelWrapper<Farmer> {
         attributes.put("farmerOgrn", getFarmerOgrn());
         attributes.put("farmerRegistrationRegionId",
             getFarmerRegistrationRegionId());
-        attributes.put("farmerFieldRegionsId", getFarmerFieldRegionsId());
         attributes.put("farmerRegistrationDate", getFarmerRegistrationDate());
         attributes.put("farmerArchiveStatus", getFarmerArchiveStatus());
 
@@ -102,13 +101,6 @@ public class FarmerWrapper implements Farmer, ModelWrapper<Farmer> {
 
         if (farmerRegistrationRegionId != null) {
             setFarmerRegistrationRegionId(farmerRegistrationRegionId);
-        }
-
-        String farmerFieldRegionsId = (String) attributes.get(
-                "farmerFieldRegionsId");
-
-        if (farmerFieldRegionsId != null) {
-            setFarmerFieldRegionsId(farmerFieldRegionsId);
         }
 
         Date farmerRegistrationDate = (Date) attributes.get(
@@ -305,26 +297,6 @@ public class FarmerWrapper implements Farmer, ModelWrapper<Farmer> {
     public void setFarmerRegistrationRegionId(
         java.lang.Long farmerRegistrationRegionId) {
         _farmer.setFarmerRegistrationRegionId(farmerRegistrationRegionId);
-    }
-
-    /**
-    * Returns the farmer field regions ID of this farmer.
-    *
-    * @return the farmer field regions ID of this farmer
-    */
-    @Override
-    public java.lang.String getFarmerFieldRegionsId() {
-        return _farmer.getFarmerFieldRegionsId();
-    }
-
-    /**
-    * Sets the farmer field regions ID of this farmer.
-    *
-    * @param farmerFieldRegionsId the farmer field regions ID of this farmer
-    */
-    @Override
-    public void setFarmerFieldRegionsId(java.lang.String farmerFieldRegionsId) {
-        _farmer.setFarmerFieldRegionsId(farmerFieldRegionsId);
     }
 
     /**

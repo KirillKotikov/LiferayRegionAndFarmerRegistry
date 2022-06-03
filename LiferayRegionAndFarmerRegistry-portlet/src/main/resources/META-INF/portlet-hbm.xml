@@ -7,7 +7,7 @@
 	<class name="ru.kotikov.model.impl.FarmerImpl" table="entity_Farmer">
 		<cache usage="read-write" />
 		<id name="farmerId" column="farmer_id" type="long">
-			<generator class="increment" />
+			<generator class="assigned" />
 		</id>
 		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
 		<property name="farmerName" type="com.liferay.portal.dao.orm.hibernate.StringType" column="farmer_name" />
@@ -16,14 +16,13 @@
 		<property name="farmerKpp" type="com.liferay.portal.dao.orm.hibernate.LongType" column="farmer_kpp" />
 		<property name="farmerOgrn" type="com.liferay.portal.dao.orm.hibernate.LongType" column="farmer_ogrn" />
 		<property name="farmerRegistrationRegionId" type="com.liferay.portal.dao.orm.hibernate.LongType" column="farmer_registration_region_id" />
-		<property name="farmerFieldRegionsId" type="com.liferay.portal.dao.orm.hibernate.StringType" column="farmer_field_regions_id" />
 		<property name="farmerRegistrationDate" type="org.hibernate.type.TimestampType" column="farmer_registration_date" />
 		<property name="farmerArchiveStatus" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="farmer_archive_status" />
 	</class>
 	<class name="ru.kotikov.model.impl.RegionImpl" table="entity_Region">
 		<cache usage="read-write" />
 		<id name="regionId" column="region_id" type="long">
-			<generator class="increment" />
+			<generator class="assigned" />
 		</id>
 		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
 		<property name="regionName" type="com.liferay.portal.dao.orm.hibernate.StringType" column="region_name" />

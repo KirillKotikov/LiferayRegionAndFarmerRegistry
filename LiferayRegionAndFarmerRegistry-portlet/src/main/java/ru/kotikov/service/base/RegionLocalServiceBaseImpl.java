@@ -284,6 +284,148 @@ public abstract class RegionLocalServiceBaseImpl extends BaseLocalServiceImpl
     }
 
     /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void addFarmerRegion(long farmerId, long regionId)
+        throws SystemException {
+        farmerPersistence.addRegion(farmerId, regionId);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void addFarmerRegion(long farmerId, Region region)
+        throws SystemException {
+        farmerPersistence.addRegion(farmerId, region);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void addFarmerRegions(long farmerId, long[] regionIds)
+        throws SystemException {
+        farmerPersistence.addRegions(farmerId, regionIds);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void addFarmerRegions(long farmerId, List<Region> Regions)
+        throws SystemException {
+        farmerPersistence.addRegions(farmerId, Regions);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void clearFarmerRegions(long farmerId) throws SystemException {
+        farmerPersistence.clearRegions(farmerId);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void deleteFarmerRegion(long farmerId, long regionId)
+        throws SystemException {
+        farmerPersistence.removeRegion(farmerId, regionId);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void deleteFarmerRegion(long farmerId, Region region)
+        throws SystemException {
+        farmerPersistence.removeRegion(farmerId, region);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void deleteFarmerRegions(long farmerId, long[] regionIds)
+        throws SystemException {
+        farmerPersistence.removeRegions(farmerId, regionIds);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void deleteFarmerRegions(long farmerId, List<Region> Regions)
+        throws SystemException {
+        farmerPersistence.removeRegions(farmerId, Regions);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<Region> getFarmerRegions(long farmerId)
+        throws SystemException {
+        return farmerPersistence.getRegions(farmerId);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<Region> getFarmerRegions(long farmerId, int start, int end)
+        throws SystemException {
+        return farmerPersistence.getRegions(farmerId, start, end);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public List<Region> getFarmerRegions(long farmerId, int start, int end,
+        OrderByComparator orderByComparator) throws SystemException {
+        return farmerPersistence.getRegions(farmerId, start, end,
+            orderByComparator);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public int getFarmerRegionsCount(long farmerId) throws SystemException {
+        return farmerPersistence.getRegionsSize(farmerId);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public boolean hasFarmerRegion(long farmerId, long regionId)
+        throws SystemException {
+        return farmerPersistence.containsRegion(farmerId, regionId);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public boolean hasFarmerRegions(long farmerId) throws SystemException {
+        return farmerPersistence.containsRegions(farmerId);
+    }
+
+    /**
+     * @throws SystemException if a system exception occurred
+     */
+    @Override
+    public void setFarmerRegions(long farmerId, long[] regionIds)
+        throws SystemException {
+        farmerPersistence.setRegions(farmerId, regionIds);
+    }
+
+    /**
      * Returns the farmer local service.
      *
      * @return the farmer local service

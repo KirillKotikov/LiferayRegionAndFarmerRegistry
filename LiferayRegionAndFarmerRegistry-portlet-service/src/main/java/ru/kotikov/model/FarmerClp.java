@@ -28,7 +28,6 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
     private long _farmerKpp;
     private long _farmerOgrn;
     private Long _farmerRegistrationRegionId;
-    private String _farmerFieldRegionsId;
     private Date _farmerRegistrationDate;
     private boolean _farmerArchiveStatus;
     private BaseModel<?> _farmerRemoteModel;
@@ -80,7 +79,6 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
         attributes.put("farmerOgrn", getFarmerOgrn());
         attributes.put("farmerRegistrationRegionId",
             getFarmerRegistrationRegionId());
-        attributes.put("farmerFieldRegionsId", getFarmerFieldRegionsId());
         attributes.put("farmerRegistrationDate", getFarmerRegistrationDate());
         attributes.put("farmerArchiveStatus", getFarmerArchiveStatus());
 
@@ -136,13 +134,6 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
 
         if (farmerRegistrationRegionId != null) {
             setFarmerRegistrationRegionId(farmerRegistrationRegionId);
-        }
-
-        String farmerFieldRegionsId = (String) attributes.get(
-                "farmerFieldRegionsId");
-
-        if (farmerFieldRegionsId != null) {
-            setFarmerFieldRegionsId(farmerFieldRegionsId);
         }
 
         Date farmerRegistrationDate = (Date) attributes.get(
@@ -339,29 +330,6 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
     }
 
     @Override
-    public String getFarmerFieldRegionsId() {
-        return _farmerFieldRegionsId;
-    }
-
-    @Override
-    public void setFarmerFieldRegionsId(String farmerFieldRegionsId) {
-        _farmerFieldRegionsId = farmerFieldRegionsId;
-
-        if (_farmerRemoteModel != null) {
-            try {
-                Class<?> clazz = _farmerRemoteModel.getClass();
-
-                Method method = clazz.getMethod("setFarmerFieldRegionsId",
-                        String.class);
-
-                method.invoke(_farmerRemoteModel, farmerFieldRegionsId);
-            } catch (Exception e) {
-                throw new UnsupportedOperationException(e);
-            }
-        }
-    }
-
-    @Override
     public Date getFarmerRegistrationDate() {
         return _farmerRegistrationDate;
     }
@@ -487,7 +455,6 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
         clone.setFarmerKpp(getFarmerKpp());
         clone.setFarmerOgrn(getFarmerOgrn());
         clone.setFarmerRegistrationRegionId(getFarmerRegistrationRegionId());
-        clone.setFarmerFieldRegionsId(getFarmerFieldRegionsId());
         clone.setFarmerRegistrationDate(getFarmerRegistrationDate());
         clone.setFarmerArchiveStatus(getFarmerArchiveStatus());
 
@@ -539,7 +506,7 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
 
     @Override
     public String toString() {
-        StringBundler sb = new StringBundler(23);
+        StringBundler sb = new StringBundler(21);
 
         sb.append("{uuid=");
         sb.append(getUuid());
@@ -557,8 +524,6 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
         sb.append(getFarmerOgrn());
         sb.append(", farmerRegistrationRegionId=");
         sb.append(getFarmerRegistrationRegionId());
-        sb.append(", farmerFieldRegionsId=");
-        sb.append(getFarmerFieldRegionsId());
         sb.append(", farmerRegistrationDate=");
         sb.append(getFarmerRegistrationDate());
         sb.append(", farmerArchiveStatus=");
@@ -570,7 +535,7 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
 
     @Override
     public String toXmlString() {
-        StringBundler sb = new StringBundler(37);
+        StringBundler sb = new StringBundler(34);
 
         sb.append("<model><model-name>");
         sb.append("ru.kotikov.model.Farmer");
@@ -607,10 +572,6 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
         sb.append(
             "<column><column-name>farmerRegistrationRegionId</column-name><column-value><![CDATA[");
         sb.append(getFarmerRegistrationRegionId());
-        sb.append("]]></column-value></column>");
-        sb.append(
-            "<column><column-name>farmerFieldRegionsId</column-name><column-value><![CDATA[");
-        sb.append(getFarmerFieldRegionsId());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>farmerRegistrationDate</column-name><column-value><![CDATA[");

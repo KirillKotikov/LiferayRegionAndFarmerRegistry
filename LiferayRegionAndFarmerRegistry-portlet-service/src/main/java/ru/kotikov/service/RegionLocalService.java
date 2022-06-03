@@ -215,6 +215,114 @@ public interface RegionLocalService extends BaseLocalService,
         throws com.liferay.portal.kernel.exception.SystemException;
 
     /**
+    * @throws SystemException if a system exception occurred
+    */
+    public void addFarmerRegion(long farmerId, long regionId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    public void addFarmerRegion(long farmerId, ru.kotikov.model.Region region)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    public void addFarmerRegions(long farmerId, long[] regionIds)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    public void addFarmerRegions(long farmerId,
+        java.util.List<ru.kotikov.model.Region> Regions)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    public void clearFarmerRegions(long farmerId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    public void deleteFarmerRegion(long farmerId, long regionId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    public void deleteFarmerRegion(long farmerId, ru.kotikov.model.Region region)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    public void deleteFarmerRegions(long farmerId, long[] regionIds)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    public void deleteFarmerRegions(long farmerId,
+        java.util.List<ru.kotikov.model.Region> Regions)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<ru.kotikov.model.Region> getFarmerRegions(
+        long farmerId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<ru.kotikov.model.Region> getFarmerRegions(
+        long farmerId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<ru.kotikov.model.Region> getFarmerRegions(
+        long farmerId, int start, int end,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public int getFarmerRegionsCount(long farmerId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public boolean hasFarmerRegion(long farmerId, long regionId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public boolean hasFarmerRegions(long farmerId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * @throws SystemException if a system exception occurred
+    */
+    public void setFarmerRegions(long farmerId, long[] regionIds)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    /**
     * Returns the Spring bean ID for this bean.
     *
     * @return the Spring bean ID for this bean
@@ -232,4 +340,14 @@ public interface RegionLocalService extends BaseLocalService,
     public java.lang.Object invokeMethod(java.lang.String name,
         java.lang.String[] parameterTypes, java.lang.Object[] arguments)
         throws java.lang.Throwable;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<ru.kotikov.model.Region> getByRegionName(
+        java.lang.String name)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<ru.kotikov.model.Region> getByRegionArchiveStatus(
+        boolean archive)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

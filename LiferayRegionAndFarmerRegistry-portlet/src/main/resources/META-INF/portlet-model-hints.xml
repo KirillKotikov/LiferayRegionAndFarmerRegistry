@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="ru.kotikov.model.Farmer">
+		<field name="uuid" type="String" />
+		<field name="farmerId" type="long" />
+		<field name="farmerName" type="String" />
+		<field name="farmerLegalForm" type="String" />
+		<field name="farmerInn" type="long" />
+		<field name="farmerKpp" type="long" />
+		<field name="farmerOgrn" type="long" />
+		<field name="farmerRegistrationRegionId" type="Long" />
+		<field name="farmerFieldRegionsId" type="String" />
+		<field name="farmerRegistrationDate" type="Date" />
+		<field name="farmerArchiveStatus" type="boolean" />
+	</model>
+	<model name="ru.kotikov.model.Region">
+		<field name="uuid" type="String" />
+		<field name="regionId" type="long" />
+		<field name="regionName" type="String" />
+		<field name="regionCode" type="long" />
+		<field name="regionArchiveStatus" type="boolean" />
+	</model>
+</model-hints>

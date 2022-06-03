@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="ru.kotikov.model.Farmer" />
+	<import class="ru.kotikov.model.Region" />
+	<class name="ru.kotikov.model.impl.FarmerImpl" table="entity_Farmer">
+		<cache usage="read-write" />
+		<id name="farmerId" column="farmer_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
+		<property name="farmerName" type="com.liferay.portal.dao.orm.hibernate.StringType" column="farmer_name" />
+		<property name="farmerLegalForm" type="com.liferay.portal.dao.orm.hibernate.StringType" column="farmer_legal_form" />
+		<property name="farmerInn" type="com.liferay.portal.dao.orm.hibernate.LongType" column="farmer_inn" />
+		<property name="farmerKpp" type="com.liferay.portal.dao.orm.hibernate.LongType" column="farmer_kpp" />
+		<property name="farmerOgrn" type="com.liferay.portal.dao.orm.hibernate.LongType" column="farmer_ogrn" />
+		<property name="farmerRegistrationRegionId" type="com.liferay.portal.dao.orm.hibernate.LongType" column="farmer_registration_region_id" />
+		<property name="farmerFieldRegionsId" type="com.liferay.portal.dao.orm.hibernate.StringType" column="farmer_field_regions_id" />
+		<property name="farmerRegistrationDate" type="org.hibernate.type.TimestampType" column="farmer_registration_date" />
+		<property name="farmerArchiveStatus" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="farmer_archive_status" />
+	</class>
+	<class name="ru.kotikov.model.impl.RegionImpl" table="entity_Region">
+		<cache usage="read-write" />
+		<id name="regionId" column="region_id" type="long">
+			<generator class="increment" />
+		</id>
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
+		<property name="regionName" type="com.liferay.portal.dao.orm.hibernate.StringType" column="region_name" />
+		<property name="regionCode" type="com.liferay.portal.dao.orm.hibernate.LongType" column="region_code" />
+		<property name="regionArchiveStatus" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="region_archive_status" />
+	</class>
+</hibernate-mapping>

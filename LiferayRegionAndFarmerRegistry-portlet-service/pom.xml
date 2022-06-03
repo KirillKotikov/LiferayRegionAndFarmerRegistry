@@ -1,51 +1,51 @@
 <?xml version="1.0"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<parent>
-		<groupId>ru.kotikov</groupId>
-		<artifactId>LiferayRegionAndFarmerRegistry</artifactId>
-		<version>1.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>ru.kotikov</groupId>
-	<artifactId>LiferayRegionAndFarmerRegistry-portlet-service</artifactId>
-	<packaging>jar</packaging>
-	<name>LiferayRegionAndFarmerRegistry Portlet Service</name>
-	<version>1.0-SNAPSHOT</version>
-	<properties>
-		<compiler.maven.source>1.7</compiler.maven.source>
-		<compiler.maven.source>1.7</compiler.maven.source>
-		<liferay.version>6.2.5</liferay.version>
-		<liferayVersion>${liferay.version}</liferayVersion>
-		<liferay.maven.plugin.version>${liferay.version}</liferay.maven.plugin.version>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>ru.kotikov</groupId>
+        <artifactId>LiferayRegionAndFarmerRegistry</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>LiferayRegionAndFarmerRegistry-portlet-service</artifactId>
+    <packaging>jar</packaging>
+    <name>LiferayRegionAndFarmerRegistry Portlet Service</name>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <compiler.maven.source>1.7</compiler.maven.source>
+        <compiler.maven.source>1.7</compiler.maven.source>
+        <liferay.version>6.2.5</liferay.version>
+        <liferayVersion>${liferay.version}</liferayVersion>
+        <liferay.maven.plugin.version>${liferay.version}</liferay.maven.plugin.version>
 
-		<portal.dir>C:\Users\user\Desktop\liferay-portal-6.2-ce-ga6</portal.dir>
-		<tomcat.dir>${portal.dir}/tomcat-7.0.62</tomcat.dir>
+        <portal.dir>C:\Users\user\Desktop\liferay-portal-6.2-ce-ga6</portal.dir>
+        <tomcat.dir>${portal.dir}/tomcat-7.0.62</tomcat.dir>
 
-		<liferay.app.server.deploy.dir>${tomcat.dir}/webapps</liferay.app.server.deploy.dir>
-		<liferay.app.server.lib.global.dir>${tomcat.dir}/lib/ext</liferay.app.server.lib.global.dir>
-		<liferay.app.server.portal.dir>${tomcat.dir}/webapps/ROOT</liferay.app.server.portal.dir>
-		<liferay.auto.deploy.dir>${portal.dir}/deploy</liferay.auto.deploy.dir>
-	</properties>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>com.liferay.maven.plugins</groupId>
-				<artifactId>liferay-maven-plugin</artifactId>
-				<version>${liferay.maven.plugin.version}</version>
-				<configuration>
-					<webappBaseDir>${basedir}/../LiferayRegionAndFarmerRegistry-portlet</webappBaseDir>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	<dependencies>
-		<dependency>
-			<groupId>com.liferay.portal</groupId>
-			<artifactId>portal-service</artifactId>
-			<version>${liferay.version}</version>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
+        <liferay.app.server.deploy.dir>${tomcat.dir}/webapps</liferay.app.server.deploy.dir>
+        <liferay.app.server.lib.global.dir>${tomcat.dir}/lib/ext</liferay.app.server.lib.global.dir>
+        <liferay.app.server.portal.dir>${tomcat.dir}/webapps/ROOT</liferay.app.server.portal.dir>
+        <liferay.auto.deploy.dir>${portal.dir}/deploy</liferay.auto.deploy.dir>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.liferay.maven.plugins</groupId>
+                <artifactId>liferay-maven-plugin</artifactId>
+                <version>${liferay.maven.plugin.version}</version>
+                <configuration>
+                    <webappBaseDir>${basedir}/../LiferayRegionAndFarmerRegistry-portlet</webappBaseDir>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>com.liferay.portal</groupId>
+            <artifactId>portal-service</artifactId>
+            <version>${liferay.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>

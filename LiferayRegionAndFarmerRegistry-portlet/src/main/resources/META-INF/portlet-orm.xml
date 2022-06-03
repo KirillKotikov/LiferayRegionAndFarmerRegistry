@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="ru.kotikov.model.impl.FarmerModelImpl">
+		<attributes>
+			<id name="farmerId">
+				<column name="FARMER_ID" />
+			</id>
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="farmerName">
+				<column name="FARMER_NAME" />
+			</basic>
+			<basic name="farmerLegalForm">
+				<column name="FARMER_LEGAL_FORM" />
+			</basic>
+			<basic name="farmerInn">
+				<column name="FARMER_INN" />
+			</basic>
+			<basic name="farmerKpp">
+				<column name="FARMER_KPP" />
+			</basic>
+			<basic name="farmerOgrn">
+				<column name="FARMER_OGRN" />
+			</basic>
+			<basic name="farmerRegistrationRegionId">
+				<column name="FARMER_REGISTRATION_REGION_ID" />
+			</basic>
+			<basic name="farmerFieldRegionsId">
+				<column name="FARMER_FIELD_REGIONS_ID" />
+			</basic>
+			<basic name="farmerRegistrationDate">
+				<column name="FARMER_REGISTRATION_DATE" />
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="farmerArchiveStatus">
+				<column name="FARMER_ARCHIVE_STATUS" />
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="ru.kotikov.model.impl.RegionModelImpl">
+		<attributes>
+			<id name="regionId">
+				<column name="REGION_ID" />
+			</id>
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="regionName">
+				<column name="REGION_NAME" />
+			</basic>
+			<basic name="regionCode">
+				<column name="REGION_CODE" />
+			</basic>
+			<basic name="regionArchiveStatus">
+				<column name="REGION_ARCHIVE_STATUS" />
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="ru.kotikov.model.impl.FarmerImpl" name="Farmer">
+		<table name="entity_Farmer" />
+		<attributes />
+	</entity>
+	<entity class="ru.kotikov.model.impl.RegionImpl" name="Region">
+		<table name="entity_Region" />
+		<attributes />
+	</entity>
+</entity-mappings>

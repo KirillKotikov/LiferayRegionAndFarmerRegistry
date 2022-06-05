@@ -11,6 +11,7 @@ import ru.kotikov.service.FarmerLocalServiceUtil;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,33 +24,20 @@ public class FarmersPortlet extends MVCPortlet {
         try {
             Farmer farmer = FarmerLocalServiceUtil.createFarmer(CounterLocalServiceUtil.increment());
             farmer.setFarmerName(ParamUtil.getString(request, "farmerName"));
-            farmer.setFarmerLegalForm(ParamUtil.getString(request, "FarmerLegalForm"));
-            farmer.setFarmerInn(ParamUtil.getLong(request, "FarmerInn"));
-            farmer.setFarmerKpp(ParamUtil.getLong(request, "FarmerKpp"));
-            farmer.setFarmerOgrn(ParamUtil.getLong(request, "FarmerOgrn"));
-            farmer.setFarmerRegistrationRegionId(ParamUtil.getLong(request, "FarmerRegistrationRegionId"));
+            farmer.setFarmerLegalForm(ParamUtil.getString(request, "farmerLegalForm"));
+            farmer.setFarmerInn(ParamUtil.getLong(request, "farmerInn"));
+            farmer.setFarmerKpp(ParamUtil.getLong(request, "farmerKpp"));
+            farmer.setFarmerOgrn(ParamUtil.getLong(request, "farmerOgrn"));
+            farmer.setFarmerRegistrationRegionId(ParamUtil.getLong(request, "farmerRegistrationRegionId"));
 
-            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-            Date registrationDate = df.parse(request.getParameter("registrationDate"));
+            SimpleDateFormat format = new SimpleDateFormat();
+            format.applyPattern("MM.dd.yy");
+            farmer.setFarmerRegistrationDate(format.parse
+                    (ParamUtil.getString(request, "farmerRegistrationDate")));
 
-
-//            String date = ParamUtil.getString(request, "d1")
-//                    + "/" + ParamUtil.getString(request, "m1")
-//                    + "/" + ParamUtil.getString(request, "y1");
-//            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//            Date registrationDate = sdf.parse(date);
-
-
-//            int year = ParamUtil.getInteger(request, "dateYear");
-//            int month = ParamUtil.getInteger(request, "dateMonth");
-//            int day = ParamUtil.getInteger(request, "dateDay");
-//            Calendar calendar = new GregorianCalendar();
-//            calendar.set(year, month, day);
-//            Date registrationDate = calendar.getTime();
-            farmer.setFarmerRegistrationDate(registrationDate);
-            farmer.setFarmerArchiveStatus(ParamUtil.getBoolean(request, "archiveStatus"));
+            farmer.setFarmerArchiveStatus(ParamUtil.getBoolean(request, "farmerArchiveStatus"));
             FarmerLocalServiceUtil.addFarmer(farmer);
-            response.setRenderParameter("jspPage", "/html/farmers/farmersView.jsp");
+            response.setRenderParameter("jspPage", "/farmersView.jsp");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,18 +46,20 @@ public class FarmersPortlet extends MVCPortlet {
     public void updateFarmer(ActionRequest request, ActionResponse response) throws SystemException, PortalException {
         Farmer farmer = FarmerLocalServiceUtil.getFarmer(ParamUtil.getLong(request, "farmerId"));
         farmer.setFarmerName(ParamUtil.getString(request, "farmerName"));
-        farmer.setFarmerLegalForm(ParamUtil.getString(request, "FarmerLegalForm"));
-        farmer.setFarmerInn(ParamUtil.getLong(request, "FarmerInn"));
-        farmer.setFarmerKpp(ParamUtil.getLong(request, "FarmerKpp"));
-        farmer.setFarmerOgrn(ParamUtil.getLong(request, "FarmerOgrn"));
-        farmer.setFarmerRegistrationRegionId(ParamUtil.getLong(request, "FarmerRegistrationRegionId"));
-        int year = ParamUtil.getInteger(request, "dateYear");
-        int month = ParamUtil.getInteger(request, "dateMonth");
-        int day = ParamUtil.getInteger(request, "dateDay");
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(year, month, day);
-        Date registrationDate = calendar.getTime();
-        farmer.setFarmerRegistrationDate(registrationDate);
+        farmer.setFarmerLegalForm(ParamUtil.getString(request, "farmerLegalForm"));
+        farmer.setFarmerInn(ParamUtil.getLong(request, "farmerInn"));
+        farmer.setFarmerKpp(ParamUtil.getLong(request, "farmerKpp"));
+        farmer.setFarmerOgrn(ParamUtil.getLong(request, "farmerOgrn"));
+        farmer.setFarmerRegistrationRegionId(ParamUtil.getLong(request, "farmerRegistrationRegionId"));
+
+        SimpleDateFormat format = new SimpleDateFormat();
+        format.applyPattern("MM.dd.yy");
+        try {
+            farmer.setFarmerRegistrationDate(format.parse(ParamUtil.getString(request, "farmerRegistrationDate")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         farmer.setFarmerArchiveStatus(ParamUtil.getBoolean(request, "archiveStatus"));
         FarmerLocalServiceUtil.updateFarmer(farmer);
         response.setRenderParameter("jspPage", "/html/farmers/farmersView.jsp");
@@ -79,9 +69,7 @@ public class FarmersPortlet extends MVCPortlet {
         Farmer currentFarmer = FarmerLocalServiceUtil.getFarmer(Long.parseLong(request.getParameter("currentFarmerId")));
         currentFarmer.setFarmerArchiveStatus(!request.getParameter("currentFarmerArchiveStatus").equals("true"));
         FarmerLocalServiceUtil.updateFarmer(currentFarmer);
-        if (currentFarmer.getFarmerArchiveStatus())
-            response.setRenderParameter("jspPage", "/farmersView.jsp");
-        else response.setRenderParameter("jspPage", "/html/farmers/archive.jsp");
+        response.setRenderParameter("jspPage", "/farmersView.jsp");
     }
 
     public void getCurrentFarmer(ActionRequest request, ActionResponse response) throws SystemException, PortalException {

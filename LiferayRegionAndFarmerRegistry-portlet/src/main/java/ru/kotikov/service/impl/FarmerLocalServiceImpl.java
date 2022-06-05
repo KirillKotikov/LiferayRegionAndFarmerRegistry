@@ -2,6 +2,7 @@ package ru.kotikov.service.impl;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import ru.kotikov.model.Farmer;
+import ru.kotikov.model.Region;
 import ru.kotikov.service.base.FarmerLocalServiceBaseImpl;
 
 import java.util.List;
@@ -32,5 +33,9 @@ public class FarmerLocalServiceImpl extends FarmerLocalServiceBaseImpl {
 
     public List<Farmer> getByFarmerArchiveStatus(boolean archive) throws SystemException {
         return farmerPersistence.findByFarmerArchiveStatus(archive);
+    }
+
+    public List<Region> getFarmersRegions(long farmerId) throws SystemException {
+        return farmerPersistence.getRegions(farmerId);
     }
 }

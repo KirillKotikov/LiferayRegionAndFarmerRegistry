@@ -24,9 +24,28 @@
         <%--    РАЙОНЫ ПОСЕВНЫЕ!!!--%>
 
         <%--    Дата!!!--%>
-        <b>Farmer registration date</b>
-        <liferay-ui:input-date name="farmerRegistrationDate" formName="date"
-                               dayParam="d1" monthParam="m1" yearParam="y1"/>
+        <label>Registration date:
+            <textarea class="form-control" type="text" placeholder="dd.mm.yyyy">01.05.2022 — 01.06.2022</textarea>
+        </label>
+        <aui:script>
+            YUI().use(
+            'aui-datepicker',
+            function(Y) {
+            new Y.DatePicker(
+            {
+            trigger: 'textarea',
+            mask: '%d.%m.%Y',
+            calendar: {
+            selectionMode: 'multiple'
+            },
+            popover: {
+            zIndex: 1
+            },
+            panes: 2
+            }
+            );
+            }
+            );</aui:script>
         <aui:input name="farmerArchiveStatus" value="true" type="hidden"/>
     </aui:fieldset>
 

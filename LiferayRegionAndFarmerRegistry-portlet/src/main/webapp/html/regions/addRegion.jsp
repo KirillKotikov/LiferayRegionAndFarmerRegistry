@@ -1,14 +1,15 @@
 <%@include file="/html/init.jsp" %>
+<portlet:defineObjects />
 
 <portlet:actionURL name="addRegion" var="addRegionUrl"/>
 
-<aui:form action="<%= addRegionUrl %>" name="<portlet:namespace />fm">
+<aui:form name="addRegionForm" action="<%= addRegionUrl %>" method="post">
   <aui:fieldset>
     <aui:input name="regionName" value="" label="Region name">
-      <aui:validator name="required" errorMessage="Region name cannot be empty!"/>
+      <aui:validator name="required"
+                     errorMessage="Region name cannot be empty!"/>
     </aui:input>
-    <aui:input name="regionCode" value="" label="Region code">
-      <aui:validator name="number" errorMessage="Сode consists of numbers only!"/>
+    <aui:input name="regionCode" label="Region code">
     </aui:input>
     <aui:input name="regionArchiveStatus" value="true" type="hidden"/>
   </aui:fieldset>

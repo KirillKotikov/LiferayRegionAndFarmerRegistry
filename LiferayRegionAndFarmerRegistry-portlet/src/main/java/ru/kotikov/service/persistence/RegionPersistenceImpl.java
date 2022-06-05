@@ -163,7 +163,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
     private static Log _log = LogFactoryUtil.getLog(RegionPersistenceImpl.class);
     private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
                 "uuid", "regionId", "regionName", "regionCode",
-                "regionArchiveStatus", "regionsFarmers"
+                "regionArchiveStatus"
             });
     private static Region _nullRegion = new RegionImpl() {
             @Override
@@ -2475,7 +2475,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
             }
         }
 
-        regionToFarmerTableMapper = TableMapperFactory.getTableMapper("entity_regions_farmers",
+        regionToFarmerTableMapper = TableMapperFactory.getTableMapper("entity_Regions_Farmers",
                 "region_id", "farmer_id", this, farmerPersistence);
     }
 
@@ -2485,6 +2485,6 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
         FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
         FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-        TableMapperFactory.removeTableMapper("entity_regions_farmers");
+        TableMapperFactory.removeTableMapper("entity_Regions_Farmers");
     }
 }

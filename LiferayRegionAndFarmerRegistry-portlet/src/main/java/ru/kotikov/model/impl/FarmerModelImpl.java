@@ -75,14 +75,14 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
     public static long FARMERARCHIVESTATUS_COLUMN_BITMASK = 1L;
     public static long FARMERNAME_COLUMN_BITMASK = 2L;
     public static long UUID_COLUMN_BITMASK = 4L;
-    public static final String MAPPING_TABLE_ENTITY_REGIONS_FARMERS_NAME = "entity_regions_farmers";
+    public static final String MAPPING_TABLE_ENTITY_REGIONS_FARMERS_NAME = "entity_Regions_Farmers";
     public static final Object[][] MAPPING_TABLE_ENTITY_REGIONS_FARMERS_COLUMNS = {
             { "farmer_id", Types.BIGINT },
             { "region_id", Types.BIGINT }
         };
-    public static final String MAPPING_TABLE_ENTITY_REGIONS_FARMERS_SQL_CREATE = "create table entity_regions_farmers (farmer_id LONG not null,region_id LONG not null,primary key (farmer_id, region_id))";
+    public static final String MAPPING_TABLE_ENTITY_REGIONS_FARMERS_SQL_CREATE = "create table entity_Regions_Farmers (farmer_id LONG not null,region_id LONG not null,primary key (farmer_id, region_id))";
     public static final boolean FINDER_CACHE_ENABLED_ENTITY_REGIONS_FARMERS = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
-                "value.object.finder.cache.enabled.entity_regions_farmers"),
+                "value.object.finder.cache.enabled.entity_Regions_Farmers"),
             true);
     public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
                 "lock.expiration.time.ru.kotikov.model.Farmer"));

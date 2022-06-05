@@ -11,7 +11,8 @@
         <column name="regionName" db-name="region_name" type="String"/>
         <column name="regionCode" db-name="region_code" type="long"/>
         <column name="regionArchiveStatus" db-name="region_archive_status" type="boolean"/>
-        <column name="regionsFarmers" db-name="regions_farmers" type="Collection" entity="Farmer" mapping-table="regions_farmers"/>
+        <column name="regionsFarmers" type="Collection"
+                entity="Farmer" mapping-table="Regions_Farmers"/>
         <!-- Order -->
         <order by="asc">
             <order-column name="regionName"/>
@@ -33,9 +34,10 @@
         <column name="farmerInn" db-name="farmer_inn" type="long"/>
         <column name="farmerKpp" db-name="farmer_kpp" type="long"/>
         <column name="farmerOgrn" db-name="farmer_ogrn" type="long"/>
-        <column name="farmerRegistrationRegionId" db-name="farmer_registration_region_id" type="Long" />
-        <column name="fieldsRegions" db-name="fields_regions" type="Collection" entity="Region" mapping-table="regions_farmers"/>
-        <column name="farmerRegistrationDate" db-name="farmer_registration_date" type="Date" />
+        <column name="farmerRegistrationRegionId" db-name="farmer_registration_region_id" type="Long"/>
+        <column name="fieldsRegions" type="Collection"
+                entity="Region" mapping-table="Regions_Farmers"/>
+        <column name="farmerRegistrationDate" db-name="farmer_registration_date" type="Date"/>
         <column name="farmerArchiveStatus" db-name="farmer_archive_status" type="boolean"/>
         <!-- Order -->
         <order by="asc">

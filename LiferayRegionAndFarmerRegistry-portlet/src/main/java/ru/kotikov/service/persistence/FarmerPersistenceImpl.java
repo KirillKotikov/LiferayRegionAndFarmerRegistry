@@ -164,7 +164,7 @@ public class FarmerPersistenceImpl extends BasePersistenceImpl<Farmer>
     private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
                 "uuid", "farmerId", "farmerName", "farmerLegalForm", "farmerInn",
                 "farmerKpp", "farmerOgrn", "farmerRegistrationRegionId",
-                "fieldsRegions", "farmerRegistrationDate", "farmerArchiveStatus"
+                "farmerRegistrationDate", "farmerArchiveStatus"
             });
     private static Farmer _nullFarmer = new FarmerImpl() {
             @Override
@@ -2481,7 +2481,7 @@ public class FarmerPersistenceImpl extends BasePersistenceImpl<Farmer>
             }
         }
 
-        farmerToRegionTableMapper = TableMapperFactory.getTableMapper("entity_regions_farmers",
+        farmerToRegionTableMapper = TableMapperFactory.getTableMapper("entity_Regions_Farmers",
                 "farmer_id", "region_id", this, regionPersistence);
     }
 
@@ -2491,6 +2491,6 @@ public class FarmerPersistenceImpl extends BasePersistenceImpl<Farmer>
         FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
         FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-        TableMapperFactory.removeTableMapper("entity_regions_farmers");
+        TableMapperFactory.removeTableMapper("entity_Regions_Farmers");
     }
 }

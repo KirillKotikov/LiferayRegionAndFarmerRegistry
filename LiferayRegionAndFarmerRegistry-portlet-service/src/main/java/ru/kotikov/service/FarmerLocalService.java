@@ -350,4 +350,9 @@ public interface FarmerLocalService extends BaseLocalService,
     public java.util.List<ru.kotikov.model.Farmer> getByFarmerArchiveStatus(
         boolean archive)
         throws com.liferay.portal.kernel.exception.SystemException;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<ru.kotikov.model.Region> getFarmersRegions(
+        long farmerId)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

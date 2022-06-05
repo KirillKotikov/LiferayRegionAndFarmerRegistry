@@ -19,6 +19,12 @@ create table entity_Region (
 	region_archive_status BOOLEAN
 );
 
+create table entity_Regions_Farmers (
+	farmer_id LONG not null,
+	region_id LONG not null,
+	primary key (farmer_id, region_id)
+);
+
 create table entity_regions_farmers (
 	farmer_id LONG not null,
 	region_id LONG not null,

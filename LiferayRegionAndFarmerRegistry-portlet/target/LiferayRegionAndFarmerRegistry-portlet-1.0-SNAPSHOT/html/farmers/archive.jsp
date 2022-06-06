@@ -13,8 +13,7 @@
     <liferay-ui:search-container-column-text property="farmerInn" name="INN"/>
     <liferay-ui:search-container-column-text property="farmerKpp" name="KPP"/>
     <liferay-ui:search-container-column-text property="farmerOgrn" name="OGRN"/>
-    <liferay-ui:search-container-column-text property="farmerRegistrationRegionId" name="Registration region id"/>
-    <liferay-ui:search-container-column-text property="farmerFieldRegionsId" name="Farmer field regions ids"/>
+    <liferay-ui:search-container-column-text property="farmerRegistrationRegionName" name="Registration region name"/>
     <liferay-ui:search-container-column-text property="farmerRegistrationDate" name="Registration date"/>
     <liferay-ui:search-container-column-text property="farmerArchiveStatus" name="Farmer archive status"/>
     <liferay-ui:search-container-column-jsp path="/html/farmers/buttons/changeArchiveStatus.jsp" align="right"/>

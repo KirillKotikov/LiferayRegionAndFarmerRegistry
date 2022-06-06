@@ -27,7 +27,7 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
     private long _farmerInn;
     private long _farmerKpp;
     private long _farmerOgrn;
-    private Long _farmerRegistrationRegionId;
+    private String _farmerRegistrationRegionName;
     private Date _farmerRegistrationDate;
     private boolean _farmerArchiveStatus;
     private BaseModel<?> _farmerRemoteModel;
@@ -77,8 +77,8 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
         attributes.put("farmerInn", getFarmerInn());
         attributes.put("farmerKpp", getFarmerKpp());
         attributes.put("farmerOgrn", getFarmerOgrn());
-        attributes.put("farmerRegistrationRegionId",
-            getFarmerRegistrationRegionId());
+        attributes.put("farmerRegistrationRegionName",
+            getFarmerRegistrationRegionName());
         attributes.put("farmerRegistrationDate", getFarmerRegistrationDate());
         attributes.put("farmerArchiveStatus", getFarmerArchiveStatus());
 
@@ -129,11 +129,11 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
             setFarmerOgrn(farmerOgrn);
         }
 
-        Long farmerRegistrationRegionId = (Long) attributes.get(
-                "farmerRegistrationRegionId");
+        String farmerRegistrationRegionName = (String) attributes.get(
+                "farmerRegistrationRegionName");
 
-        if (farmerRegistrationRegionId != null) {
-            setFarmerRegistrationRegionId(farmerRegistrationRegionId);
+        if (farmerRegistrationRegionName != null) {
+            setFarmerRegistrationRegionName(farmerRegistrationRegionName);
         }
 
         Date farmerRegistrationDate = (Date) attributes.get(
@@ -307,22 +307,23 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
     }
 
     @Override
-    public Long getFarmerRegistrationRegionId() {
-        return _farmerRegistrationRegionId;
+    public String getFarmerRegistrationRegionName() {
+        return _farmerRegistrationRegionName;
     }
 
     @Override
-    public void setFarmerRegistrationRegionId(Long farmerRegistrationRegionId) {
-        _farmerRegistrationRegionId = farmerRegistrationRegionId;
+    public void setFarmerRegistrationRegionName(
+        String farmerRegistrationRegionName) {
+        _farmerRegistrationRegionName = farmerRegistrationRegionName;
 
         if (_farmerRemoteModel != null) {
             try {
                 Class<?> clazz = _farmerRemoteModel.getClass();
 
-                Method method = clazz.getMethod("setFarmerRegistrationRegionId",
-                        Long.class);
+                Method method = clazz.getMethod("setFarmerRegistrationRegionName",
+                        String.class);
 
-                method.invoke(_farmerRemoteModel, farmerRegistrationRegionId);
+                method.invoke(_farmerRemoteModel, farmerRegistrationRegionName);
             } catch (Exception e) {
                 throw new UnsupportedOperationException(e);
             }
@@ -454,7 +455,7 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
         clone.setFarmerInn(getFarmerInn());
         clone.setFarmerKpp(getFarmerKpp());
         clone.setFarmerOgrn(getFarmerOgrn());
-        clone.setFarmerRegistrationRegionId(getFarmerRegistrationRegionId());
+        clone.setFarmerRegistrationRegionName(getFarmerRegistrationRegionName());
         clone.setFarmerRegistrationDate(getFarmerRegistrationDate());
         clone.setFarmerArchiveStatus(getFarmerArchiveStatus());
 
@@ -522,8 +523,8 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
         sb.append(getFarmerKpp());
         sb.append(", farmerOgrn=");
         sb.append(getFarmerOgrn());
-        sb.append(", farmerRegistrationRegionId=");
-        sb.append(getFarmerRegistrationRegionId());
+        sb.append(", farmerRegistrationRegionName=");
+        sb.append(getFarmerRegistrationRegionName());
         sb.append(", farmerRegistrationDate=");
         sb.append(getFarmerRegistrationDate());
         sb.append(", farmerArchiveStatus=");
@@ -570,8 +571,8 @@ public class FarmerClp extends BaseModelImpl<Farmer> implements Farmer {
         sb.append(getFarmerOgrn());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>farmerRegistrationRegionId</column-name><column-value><![CDATA[");
-        sb.append(getFarmerRegistrationRegionId());
+            "<column><column-name>farmerRegistrationRegionName</column-name><column-value><![CDATA[");
+        sb.append(getFarmerRegistrationRegionName());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>farmerRegistrationDate</column-name><column-value><![CDATA[");

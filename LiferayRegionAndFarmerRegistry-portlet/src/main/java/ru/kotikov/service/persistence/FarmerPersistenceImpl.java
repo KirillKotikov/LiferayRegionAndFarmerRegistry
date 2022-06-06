@@ -163,7 +163,7 @@ public class FarmerPersistenceImpl extends BasePersistenceImpl<Farmer>
     private static Log _log = LogFactoryUtil.getLog(FarmerPersistenceImpl.class);
     private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
                 "uuid", "farmerId", "farmerName", "farmerLegalForm", "farmerInn",
-                "farmerKpp", "farmerOgrn", "farmerRegistrationRegionId",
+                "farmerKpp", "farmerOgrn", "farmerRegistrationRegionName",
                 "farmerRegistrationDate", "farmerArchiveStatus"
             });
     private static Farmer _nullFarmer = new FarmerImpl() {
@@ -1913,7 +1913,7 @@ public class FarmerPersistenceImpl extends BasePersistenceImpl<Farmer>
         farmerImpl.setFarmerInn(farmer.getFarmerInn());
         farmerImpl.setFarmerKpp(farmer.getFarmerKpp());
         farmerImpl.setFarmerOgrn(farmer.getFarmerOgrn());
-        farmerImpl.setFarmerRegistrationRegionId(farmer.getFarmerRegistrationRegionId());
+        farmerImpl.setFarmerRegistrationRegionName(farmer.getFarmerRegistrationRegionName());
         farmerImpl.setFarmerRegistrationDate(farmer.getFarmerRegistrationDate());
         farmerImpl.setFarmerArchiveStatus(farmer.isFarmerArchiveStatus());
 

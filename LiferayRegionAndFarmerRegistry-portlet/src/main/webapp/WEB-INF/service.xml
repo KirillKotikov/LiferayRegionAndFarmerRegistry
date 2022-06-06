@@ -34,7 +34,7 @@
         <column name="farmerInn" db-name="farmer_inn" type="long"/>
         <column name="farmerKpp" db-name="farmer_kpp" type="long"/>
         <column name="farmerOgrn" db-name="farmer_ogrn" type="long"/>
-        <column name="farmerRegistrationRegionId" db-name="farmer_registration_region_id" type="Long"/>
+        <column name="farmerRegistrationRegionName" db-name="farmer_registration_region_name" type="String"/>
         <column name="fieldsRegions" type="Collection"
                 entity="Region" mapping-table="Regions_Farmers"/>
         <column name="farmerRegistrationDate" db-name="farmer_registration_date" type="Date"/>

@@ -20,36 +20,34 @@
         <aui:input name="farmerInn" label="INN" value="<%= currentFarmer.getFarmerInn() %>">
             <aui:validator name="required" errorMessage="INN cannot be empty!"/>
             <aui:validator name="digits" errorMessage="INN consists of 12 digits!"/>
-            <aui:validator name="rangeLength" errorMessage="INN consists of 12 digits!">[11,13]</aui:validator>
+            <aui:validator name="rangeLength" errorMessage="INN consists of 12 digits!">[12,12]</aui:validator>
         </aui:input>
         <aui:input name="farmerKpp" label="KPP" value="<%= currentFarmer.getFarmerKpp() %>">
             <aui:validator name="digits" errorMessage="KPP consists of 9 digits!"/>
-            <aui:validator name="rangeLength" errorMessage="KPP consists of 9 digits!">[8,10]</aui:validator>
+            <aui:validator name="rangeLength" errorMessage="KPP consists of 9 digits!">[9,9]</aui:validator>
         </aui:input>
         <aui:input name="farmerOgrn" label="OGRN" value="<%= currentFarmer.getFarmerOgrn() %>">
             <aui:validator name="digits" errorMessage="OGRN consists of 13 digits!"/>
-            <aui:validator name="rangeLength" errorMessage="OGRN consists of 13 digits!">[12,14]</aui:validator>
+            <aui:validator name="rangeLength" errorMessage="OGRN consists of 13 digits!">[13,13]</aui:validator>
         </aui:input>
-        <%--        <aui:input name="farmerRegistrationRegionId" label="Registration region id"--%>
-        <%--                   value="<%= currentFarmer.getFarmerRegistrationRegionId() %>">--%>
-        <%--            <aui:validator name="digits" errorMessage="Registration region id consists of digits only!"/>--%>
-        <%--        </aui:input>--%>
-
         <aui:select name="farmerRegistrationRegionId" label="Registration region id">
             <%
                 for (Region region : regionList) {
-                    boolean selected = false;
-                    if (currentFarmer.getFarmerRegistrationRegionId() == region.getRegionId()) {
-                        selected = true;
-                    }
+                    boolean selected = currentFarmer.getFarmerRegistrationRegionName().equals(region.getRegionName());
             %>
-            <aui:option label="<%=region.getRegionName()%>" value="<%=region.getRegionId()%>"
+            <aui:option label="<%=region.getRegionName()%>" value="<%=region.getRegionName()%>"
                         selected="<%=selected %>"/>
             <%}%>
         </aui:select>
-        <%--    РАЙОНЫ ПОСЕВНЫЕ!!!--%>
-
-        <%--    Дата!!!--%>
+        <aui:select name="farmerFieldsRegions" label="Fields regions" multiple="true">
+            <%
+                for (Region region : regionList) {
+                    boolean selected = currentFarmer.getFarmerRegistrationRegionName().equals(region.getRegionName());
+            %>
+            <aui:option label="<%=region.getRegionName()%>" value="<%=region.getRegionName()%>"
+                        selected="<%=selected %>"/>
+            <%}%>
+        </aui:select>
         <div id="date">
             <aui:input readonly="true" name="farmerRegistrationDate" label="Registration date" placeholder="dd.mm.yyyy"
                        value="<%= format.format(currentFarmer.getFarmerRegistrationDate()) %>"/>

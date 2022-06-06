@@ -1,5 +1,9 @@
+<%@ page import="java.util.List" %>
 <%@include file="/html/init.jsp" %>
 
+<%
+    List<Region> regionList = RegionLocalServiceUtil.getAllRegions();
+%>
 <jsp:useBean id="resultList" type="java.util.List" scope="request"/>
 
 <portlet:renderURL var="addFarmer">
@@ -16,11 +20,15 @@
     <aui:input name="searchFarmerName" label="Farmer name"> </aui:input>
     <aui:input name="searchFarmerInn" label="INN">
         <aui:validator name="digits" errorMessage="INN consists of 12 digits!"/>
-        <aui:validator name="rangeLength" errorMessage="INN consists of 12 digits!">[11,13]</aui:validator>
+        <aui:validator name="rangeLength" errorMessage="INN consists of 12 digits!">[12,12]</aui:validator>
     </aui:input>
-    <aui:input name="searchFarmerRegistrationRegionId" label="Registration region id">
-        <aui:validator name="digits" errorMessage="Id consist of digits only!"/>
-    </aui:input>
+    <aui:select name="searchFarmerRegistrationRegionName" label="Registration region name">
+        <%
+            for (Region region : regionList) {
+        %>
+        <aui:option label="<%=region.getRegionName()%>" value="<%=region.getRegionName()%>"/>
+        <%}%>
+    </aui:select>
     <div id="date">
         <aui:input readonly="true" name="startRegistrationDate" label="Registration start date:"
                    placeholder="dd.mm.yyyy"/>
@@ -57,7 +65,7 @@
         </portlet:renderURL>
         <aui:button onClick="<%= farmersViewUrl %>" value="Show all farmers"/>
     </aui:button-row>
-    </aui:form>
+</aui:form>
 
 
 <liferay-ui:search-container>

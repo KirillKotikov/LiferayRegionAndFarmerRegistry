@@ -6,7 +6,7 @@ create table entity_Farmer (
 	farmer_inn LONG,
 	farmer_kpp LONG,
 	farmer_ogrn LONG,
-	farmer_registration_region_id LONG,
+	farmer_registration_region_name VARCHAR(75) null,
 	farmer_registration_date DATE null,
 	farmer_archive_status BOOLEAN
 );

@@ -30,8 +30,8 @@
 			<basic name="farmerOgrn">
 				<column name="FARMER_OGRN" />
 			</basic>
-			<basic name="farmerRegistrationRegionId">
-				<column name="FARMER_REGISTRATION_REGION_ID" />
+			<basic name="farmerRegistrationRegionName">
+				<column name="FARMER_REGISTRATION_REGION_NAME" />
 			</basic>
 			<basic name="farmerRegistrationDate">
 				<column name="FARMER_REGISTRATION_DATE" />

@@ -15,7 +15,7 @@
 		<property name="farmerInn" type="com.liferay.portal.dao.orm.hibernate.LongType" column="farmer_inn" />
 		<property name="farmerKpp" type="com.liferay.portal.dao.orm.hibernate.LongType" column="farmer_kpp" />
 		<property name="farmerOgrn" type="com.liferay.portal.dao.orm.hibernate.LongType" column="farmer_ogrn" />
-		<property name="farmerRegistrationRegionId" type="com.liferay.portal.dao.orm.hibernate.LongType" column="farmer_registration_region_id" />
+		<property name="farmerRegistrationRegionName" type="com.liferay.portal.dao.orm.hibernate.StringType" column="farmer_registration_region_name" />
 		<property name="farmerRegistrationDate" type="org.hibernate.type.TimestampType" column="farmer_registration_date" />
 		<property name="farmerArchiveStatus" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="farmer_archive_status" />
 	</class>

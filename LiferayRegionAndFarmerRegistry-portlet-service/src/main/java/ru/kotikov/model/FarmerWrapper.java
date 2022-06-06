@@ -44,8 +44,8 @@ public class FarmerWrapper implements Farmer, ModelWrapper<Farmer> {
         attributes.put("farmerInn", getFarmerInn());
         attributes.put("farmerKpp", getFarmerKpp());
         attributes.put("farmerOgrn", getFarmerOgrn());
-        attributes.put("farmerRegistrationRegionId",
-            getFarmerRegistrationRegionId());
+        attributes.put("farmerRegistrationRegionName",
+            getFarmerRegistrationRegionName());
         attributes.put("farmerRegistrationDate", getFarmerRegistrationDate());
         attributes.put("farmerArchiveStatus", getFarmerArchiveStatus());
 
@@ -96,11 +96,11 @@ public class FarmerWrapper implements Farmer, ModelWrapper<Farmer> {
             setFarmerOgrn(farmerOgrn);
         }
 
-        Long farmerRegistrationRegionId = (Long) attributes.get(
-                "farmerRegistrationRegionId");
+        String farmerRegistrationRegionName = (String) attributes.get(
+                "farmerRegistrationRegionName");
 
-        if (farmerRegistrationRegionId != null) {
-            setFarmerRegistrationRegionId(farmerRegistrationRegionId);
+        if (farmerRegistrationRegionName != null) {
+            setFarmerRegistrationRegionName(farmerRegistrationRegionName);
         }
 
         Date farmerRegistrationDate = (Date) attributes.get(
@@ -279,24 +279,24 @@ public class FarmerWrapper implements Farmer, ModelWrapper<Farmer> {
     }
 
     /**
-    * Returns the farmer registration region ID of this farmer.
+    * Returns the farmer registration region name of this farmer.
     *
-    * @return the farmer registration region ID of this farmer
+    * @return the farmer registration region name of this farmer
     */
     @Override
-    public java.lang.Long getFarmerRegistrationRegionId() {
-        return _farmer.getFarmerRegistrationRegionId();
+    public java.lang.String getFarmerRegistrationRegionName() {
+        return _farmer.getFarmerRegistrationRegionName();
     }
 
     /**
-    * Sets the farmer registration region ID of this farmer.
+    * Sets the farmer registration region name of this farmer.
     *
-    * @param farmerRegistrationRegionId the farmer registration region ID of this farmer
+    * @param farmerRegistrationRegionName the farmer registration region name of this farmer
     */
     @Override
-    public void setFarmerRegistrationRegionId(
-        java.lang.Long farmerRegistrationRegionId) {
-        _farmer.setFarmerRegistrationRegionId(farmerRegistrationRegionId);
+    public void setFarmerRegistrationRegionName(
+        java.lang.String farmerRegistrationRegionName) {
+        _farmer.setFarmerRegistrationRegionName(farmerRegistrationRegionName);
     }
 
     /**

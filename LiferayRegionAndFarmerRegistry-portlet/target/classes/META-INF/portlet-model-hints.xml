@@ -9,7 +9,7 @@
 		<field name="farmerInn" type="long" />
 		<field name="farmerKpp" type="long" />
 		<field name="farmerOgrn" type="long" />
-		<field name="farmerRegistrationRegionId" type="Long" />
+		<field name="farmerRegistrationRegionName" type="String" />
 		<field name="farmerRegistrationDate" type="Date" />
 		<field name="farmerArchiveStatus" type="boolean" />
 	</model>

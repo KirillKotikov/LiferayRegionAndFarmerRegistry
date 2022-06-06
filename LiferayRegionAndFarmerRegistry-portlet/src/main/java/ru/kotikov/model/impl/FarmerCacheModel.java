@@ -28,7 +28,7 @@ public class FarmerCacheModel implements CacheModel<Farmer>, Externalizable {
     public long farmerInn;
     public long farmerKpp;
     public long farmerOgrn;
-    public Long farmerRegistrationRegionId;
+    public String farmerRegistrationRegionName;
     public long farmerRegistrationDate;
     public boolean farmerArchiveStatus;
 
@@ -50,8 +50,8 @@ public class FarmerCacheModel implements CacheModel<Farmer>, Externalizable {
         sb.append(farmerKpp);
         sb.append(", farmerOgrn=");
         sb.append(farmerOgrn);
-        sb.append(", farmerRegistrationRegionId=");
-        sb.append(farmerRegistrationRegionId);
+        sb.append(", farmerRegistrationRegionName=");
+        sb.append(farmerRegistrationRegionName);
         sb.append(", farmerRegistrationDate=");
         sb.append(farmerRegistrationDate);
         sb.append(", farmerArchiveStatus=");
@@ -88,7 +88,12 @@ public class FarmerCacheModel implements CacheModel<Farmer>, Externalizable {
         farmerImpl.setFarmerInn(farmerInn);
         farmerImpl.setFarmerKpp(farmerKpp);
         farmerImpl.setFarmerOgrn(farmerOgrn);
-        farmerImpl.setFarmerRegistrationRegionId(farmerRegistrationRegionId);
+
+        if (farmerRegistrationRegionName == null) {
+            farmerImpl.setFarmerRegistrationRegionName(StringPool.BLANK);
+        } else {
+            farmerImpl.setFarmerRegistrationRegionName(farmerRegistrationRegionName);
+        }
 
         if (farmerRegistrationDate == Long.MIN_VALUE) {
             farmerImpl.setFarmerRegistrationDate(null);
@@ -113,7 +118,7 @@ public class FarmerCacheModel implements CacheModel<Farmer>, Externalizable {
         farmerInn = objectInput.readLong();
         farmerKpp = objectInput.readLong();
         farmerOgrn = objectInput.readLong();
-        farmerRegistrationRegionId = objectInput.readLong();
+        farmerRegistrationRegionName = objectInput.readUTF();
         farmerRegistrationDate = objectInput.readLong();
         farmerArchiveStatus = objectInput.readBoolean();
     }
@@ -144,7 +149,13 @@ public class FarmerCacheModel implements CacheModel<Farmer>, Externalizable {
         objectOutput.writeLong(farmerInn);
         objectOutput.writeLong(farmerKpp);
         objectOutput.writeLong(farmerOgrn);
-        objectOutput.writeLong(farmerRegistrationRegionId);
+
+        if (farmerRegistrationRegionName == null) {
+            objectOutput.writeUTF(StringPool.BLANK);
+        } else {
+            objectOutput.writeUTF(farmerRegistrationRegionName);
+        }
+
         objectOutput.writeLong(farmerRegistrationDate);
         objectOutput.writeBoolean(farmerArchiveStatus);
     }

@@ -7,6 +7,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import ru.kotikov.model.Farmer;
 import ru.kotikov.service.FarmerLocalServiceUtil;
+import ru.kotikov.service.RegionLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -27,17 +28,14 @@ public class FarmersPortlet extends MVCPortlet {
             farmer.setFarmerInn(ParamUtil.getLong(request, "farmerInn"));
             farmer.setFarmerKpp(ParamUtil.getLong(request, "farmerKpp"));
             farmer.setFarmerOgrn(ParamUtil.getLong(request, "farmerOgrn"));
-            farmer.setFarmerRegistrationRegionId(ParamUtil.getLong(request, "farmerRegistrationRegionId"));
-
+            farmer.setFarmerRegistrationRegionName(ParamUtil.getString(request, "farmerRegistrationRegionName"));
             SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
             if (!(ParamUtil.getString(request, "farmerRegistrationDate")).equals("")) {
                 farmer.setFarmerRegistrationDate(format.parse
                         (ParamUtil.getString(request, "farmerRegistrationDate")));
             } else farmer.setFarmerRegistrationDate(null);
             farmer.setFarmerArchiveStatus(ParamUtil.getBoolean(request, "farmerArchiveStatus"));
-
-
-
+            RegionLocalServiceUtil.setFarmerRegions(farmer.getFarmerId(), ParamUtil.getLongValues(request, "farmerFieldsRegions"));
             FarmerLocalServiceUtil.addFarmer(farmer);
             response.setRenderParameter("jspPage", "/farmersView.jsp");
         } catch (Exception e) {
@@ -52,7 +50,7 @@ public class FarmersPortlet extends MVCPortlet {
         farmer.setFarmerInn(ParamUtil.getLong(request, "farmerInn"));
         farmer.setFarmerKpp(ParamUtil.getLong(request, "farmerKpp"));
         farmer.setFarmerOgrn(ParamUtil.getLong(request, "farmerOgrn"));
-        farmer.setFarmerRegistrationRegionId(ParamUtil.getLong(request, "farmerRegistrationRegionId"));
+        farmer.setFarmerRegistrationRegionName(ParamUtil.getString(request, "farmerRegistrationRegionName"));
 
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         try {
@@ -102,8 +100,8 @@ public class FarmersPortlet extends MVCPortlet {
                                 || farmer.getFarmerName().equalsIgnoreCase(ParamUtil.getString(request, "searchFarmerName")))
                                 && (ParamUtil.getLong(request, "searchFarmerInn") == 0
                                 || farmer.getFarmerInn() == ParamUtil.getLong(request, "searchFarmerInn"))
-                                && (ParamUtil.getLong(request, "searchFarmerRegistrationRegionId") == 0
-                                || farmer.getFarmerRegistrationRegionId() == ParamUtil.getLong(request, "searchFarmerRegistrationRegionId"))
+                                && (ParamUtil.getString(request, "searchFarmerRegistrationRegionName").equals("")
+                                || farmer.getFarmerRegistrationRegionName().equals(ParamUtil.getString(request, "searchFarmerRegistrationRegionName")))
                                 && (starDate == null || farmer.getFarmerRegistrationDate().after(starDate))
                                 && (endDate == null || farmer.getFarmerRegistrationDate().before(endDate))
                                 && (farmer.getFarmerArchiveStatus() == ParamUtil.getBoolean(request, "searchFarmerArchiveStatus"))

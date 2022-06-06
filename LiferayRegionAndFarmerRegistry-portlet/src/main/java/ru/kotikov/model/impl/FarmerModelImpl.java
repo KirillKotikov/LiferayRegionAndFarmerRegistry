@@ -52,11 +52,11 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
             { "farmer_inn", Types.BIGINT },
             { "farmer_kpp", Types.BIGINT },
             { "farmer_ogrn", Types.BIGINT },
-            { "farmer_registration_region_id", Types.BIGINT },
+            { "farmer_registration_region_name", Types.VARCHAR },
             { "farmer_registration_date", Types.TIMESTAMP },
             { "farmer_archive_status", Types.BOOLEAN }
         };
-    public static final String TABLE_SQL_CREATE = "create table entity_Farmer (uuid_ VARCHAR(75) null,farmer_id LONG not null primary key,farmer_name VARCHAR(75) null,farmer_legal_form VARCHAR(75) null,farmer_inn LONG,farmer_kpp LONG,farmer_ogrn LONG,farmer_registration_region_id LONG,farmer_registration_date DATE null,farmer_archive_status BOOLEAN)";
+    public static final String TABLE_SQL_CREATE = "create table entity_Farmer (uuid_ VARCHAR(75) null,farmer_id LONG not null primary key,farmer_name VARCHAR(75) null,farmer_legal_form VARCHAR(75) null,farmer_inn LONG,farmer_kpp LONG,farmer_ogrn LONG,farmer_registration_region_name VARCHAR(75) null,farmer_registration_date DATE null,farmer_archive_status BOOLEAN)";
     public static final String TABLE_SQL_DROP = "drop table entity_Farmer";
     public static final String ORDER_BY_JPQL = " ORDER BY farmer.farmerName ASC";
     public static final String ORDER_BY_SQL = " ORDER BY entity_Farmer.farmer_name ASC";
@@ -97,7 +97,7 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
     private long _farmerInn;
     private long _farmerKpp;
     private long _farmerOgrn;
-    private Long _farmerRegistrationRegionId;
+    private String _farmerRegistrationRegionName;
     private Date _farmerRegistrationDate;
     private boolean _farmerArchiveStatus;
     private boolean _originalFarmerArchiveStatus;
@@ -149,8 +149,8 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
         attributes.put("farmerInn", getFarmerInn());
         attributes.put("farmerKpp", getFarmerKpp());
         attributes.put("farmerOgrn", getFarmerOgrn());
-        attributes.put("farmerRegistrationRegionId",
-            getFarmerRegistrationRegionId());
+        attributes.put("farmerRegistrationRegionName",
+            getFarmerRegistrationRegionName());
         attributes.put("farmerRegistrationDate", getFarmerRegistrationDate());
         attributes.put("farmerArchiveStatus", getFarmerArchiveStatus());
 
@@ -201,11 +201,11 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
             setFarmerOgrn(farmerOgrn);
         }
 
-        Long farmerRegistrationRegionId = (Long) attributes.get(
-                "farmerRegistrationRegionId");
+        String farmerRegistrationRegionName = (String) attributes.get(
+                "farmerRegistrationRegionName");
 
-        if (farmerRegistrationRegionId != null) {
-            setFarmerRegistrationRegionId(farmerRegistrationRegionId);
+        if (farmerRegistrationRegionName != null) {
+            setFarmerRegistrationRegionName(farmerRegistrationRegionName);
         }
 
         Date farmerRegistrationDate = (Date) attributes.get(
@@ -324,13 +324,18 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
     }
 
     @Override
-    public Long getFarmerRegistrationRegionId() {
-        return _farmerRegistrationRegionId;
+    public String getFarmerRegistrationRegionName() {
+        if (_farmerRegistrationRegionName == null) {
+            return StringPool.BLANK;
+        } else {
+            return _farmerRegistrationRegionName;
+        }
     }
 
     @Override
-    public void setFarmerRegistrationRegionId(Long farmerRegistrationRegionId) {
-        _farmerRegistrationRegionId = farmerRegistrationRegionId;
+    public void setFarmerRegistrationRegionName(
+        String farmerRegistrationRegionName) {
+        _farmerRegistrationRegionName = farmerRegistrationRegionName;
     }
 
     @Override
@@ -408,7 +413,7 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
         farmerImpl.setFarmerInn(getFarmerInn());
         farmerImpl.setFarmerKpp(getFarmerKpp());
         farmerImpl.setFarmerOgrn(getFarmerOgrn());
-        farmerImpl.setFarmerRegistrationRegionId(getFarmerRegistrationRegionId());
+        farmerImpl.setFarmerRegistrationRegionName(getFarmerRegistrationRegionName());
         farmerImpl.setFarmerRegistrationDate(getFarmerRegistrationDate());
         farmerImpl.setFarmerArchiveStatus(getFarmerArchiveStatus());
 
@@ -507,7 +512,14 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
 
         farmerCacheModel.farmerOgrn = getFarmerOgrn();
 
-        farmerCacheModel.farmerRegistrationRegionId = getFarmerRegistrationRegionId();
+        farmerCacheModel.farmerRegistrationRegionName = getFarmerRegistrationRegionName();
+
+        String farmerRegistrationRegionName = farmerCacheModel.farmerRegistrationRegionName;
+
+        if ((farmerRegistrationRegionName != null) &&
+                (farmerRegistrationRegionName.length() == 0)) {
+            farmerCacheModel.farmerRegistrationRegionName = null;
+        }
 
         Date farmerRegistrationDate = getFarmerRegistrationDate();
 
@@ -540,8 +552,8 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
         sb.append(getFarmerKpp());
         sb.append(", farmerOgrn=");
         sb.append(getFarmerOgrn());
-        sb.append(", farmerRegistrationRegionId=");
-        sb.append(getFarmerRegistrationRegionId());
+        sb.append(", farmerRegistrationRegionName=");
+        sb.append(getFarmerRegistrationRegionName());
         sb.append(", farmerRegistrationDate=");
         sb.append(getFarmerRegistrationDate());
         sb.append(", farmerArchiveStatus=");
@@ -588,8 +600,8 @@ public class FarmerModelImpl extends BaseModelImpl<Farmer>
         sb.append(getFarmerOgrn());
         sb.append("]]></column-value></column>");
         sb.append(
-            "<column><column-name>farmerRegistrationRegionId</column-name><column-value><![CDATA[");
-        sb.append(getFarmerRegistrationRegionId());
+            "<column><column-name>farmerRegistrationRegionName</column-name><column-value><![CDATA[");
+        sb.append(getFarmerRegistrationRegionName());
         sb.append("]]></column-value></column>");
         sb.append(
             "<column><column-name>farmerRegistrationDate</column-name><column-value><![CDATA[");

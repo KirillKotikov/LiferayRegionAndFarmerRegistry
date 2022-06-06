@@ -1,0 +1,54 @@
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN"
+        "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+
+<service-builder package-path="ru.kotikov">
+    <author>Kirill_Kotikov</author>
+    <namespace>entity</namespace>
+    <entity name="Region" uuid="true" local-service="true" remote-service="false">
+        <!-- PK fields -->
+        <column name="regionId" db-name="region_id" type="long" primary="true"/>
+        <!-- Other fields -->
+        <column name="regionName" db-name="region_name" type="String"/>
+        <column name="regionCode" db-name="region_code" type="long"/>
+        <column name="regionArchiveStatus" db-name="region_archive_status" type="boolean"/>
+        <column name="regionsFarmers" type="Collection"
+                entity="Farmer" mapping-table="Regions_Farmers"/>
+        <!-- Order -->
+        <order by="asc">
+            <order-column name="regionName"/>
+        </order>
+        <!-- Finder methods -->
+        <finder name="RegionName" return-type="Collection">
+            <finder-column name="regionName"/>
+        </finder>
+        <finder name="RegionArchiveStatus" return-type="Collection">
+            <finder-column name="regionArchiveStatus"/>
+        </finder>
+    </entity>
+    <entity name="Farmer" uuid="true" local-service="true" remote-service="false">
+        <!-- PK fields -->
+        <column name="farmerId" db-name="farmer_id" type="long" primary="true"/>
+        <!-- Other fields -->
+        <column name="farmerName" db-name="farmer_name" type="String"/>
+        <column name="farmerLegalForm" db-name="farmer_legal_form" type="String"/>
+        <column name="farmerInn" db-name="farmer_inn" type="long"/>
+        <column name="farmerKpp" db-name="farmer_kpp" type="long"/>
+        <column name="farmerOgrn" db-name="farmer_ogrn" type="long"/>
+        <column name="farmerRegistrationRegionId" db-name="farmer_registration_region_id" type="Long"/>
+        <column name="fieldsRegions" type="Collection"
+                entity="Region" mapping-table="Regions_Farmers"/>
+        <column name="farmerRegistrationDate" db-name="farmer_registration_date" type="Date"/>
+        <column name="farmerArchiveStatus" db-name="farmer_archive_status" type="boolean"/>
+        <!-- Order -->
+        <order by="asc">
+            <order-column name="farmerName"/>
+        </order>
+        <!-- Finder methods -->
+        <finder name="FarmerName" return-type="Collection">
+            <finder-column name="farmerName"/>
+        </finder>
+        <finder name="FarmerArchiveStatus" return-type="Collection">
+            <finder-column name="farmerArchiveStatus"/>
+        </finder>
+    </entity>
+</service-builder>

@@ -436,6 +436,12 @@ public class FarmerLocalServiceWrapper implements FarmerLocalService,
         return _farmerLocalService.getFarmersRegions(farmerId);
     }
 
+    @Override
+    public java.util.List<ru.kotikov.model.Farmer> getAllFarmers()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _farmerLocalService.getAllFarmers();
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

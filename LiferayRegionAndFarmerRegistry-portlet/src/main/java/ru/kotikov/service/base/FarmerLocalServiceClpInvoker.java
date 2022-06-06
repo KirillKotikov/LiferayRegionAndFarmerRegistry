@@ -83,6 +83,8 @@ public class FarmerLocalServiceClpInvoker {
     private String[] _methodParameterTypes59;
     private String _methodName60;
     private String[] _methodParameterTypes60;
+    private String _methodName61;
+    private String[] _methodParameterTypes61;
 
     public FarmerLocalServiceClpInvoker() {
         _methodName0 = "addFarmer";
@@ -247,6 +249,10 @@ public class FarmerLocalServiceClpInvoker {
         _methodName60 = "getFarmersRegions";
 
         _methodParameterTypes60 = new String[] { "long" };
+
+        _methodName61 = "getAllFarmers";
+
+        _methodParameterTypes61 = new String[] {  };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -478,6 +484,11 @@ public class FarmerLocalServiceClpInvoker {
         if (_methodName60.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
             return FarmerLocalServiceUtil.getFarmersRegions(((Long) arguments[0]).longValue());
+        }
+
+        if (_methodName61.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
+            return FarmerLocalServiceUtil.getAllFarmers();
         }
 
         throw new UnsupportedOperationException();

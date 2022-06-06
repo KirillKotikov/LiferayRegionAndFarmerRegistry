@@ -80,6 +80,8 @@ public class RegionLocalServiceClp implements RegionLocalService {
     private String[] _methodParameterTypes35;
     private String _methodName36;
     private String[] _methodParameterTypes36;
+    private String _methodName37;
+    private String[] _methodParameterTypes37;
 
     public RegionLocalServiceClp(InvokableLocalService invokableLocalService) {
         _invokableLocalService = invokableLocalService;
@@ -242,6 +244,10 @@ public class RegionLocalServiceClp implements RegionLocalService {
         _methodName36 = "getByRegionArchiveStatus";
 
         _methodParameterTypes36 = new String[] { "boolean" };
+
+        _methodName37 = "getAllRegions";
+
+        _methodParameterTypes37 = new String[] {  };
     }
 
     @Override
@@ -1186,6 +1192,32 @@ public class RegionLocalServiceClp implements RegionLocalService {
         try {
             returnObj = _invokableLocalService.invokeMethod(_methodName36,
                     _methodParameterTypes36, new Object[] { archive });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<ru.kotikov.model.Region>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.util.List<ru.kotikov.model.Region> getAllRegions()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName37,
+                    _methodParameterTypes37, new Object[] {  });
         } catch (Throwable t) {
             t = ClpSerializer.translateThrowable(t);
 

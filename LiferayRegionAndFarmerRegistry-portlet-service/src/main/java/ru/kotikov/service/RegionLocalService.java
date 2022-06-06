@@ -350,4 +350,8 @@ public interface RegionLocalService extends BaseLocalService,
     public java.util.List<ru.kotikov.model.Region> getByRegionArchiveStatus(
         boolean archive)
         throws com.liferay.portal.kernel.exception.SystemException;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<ru.kotikov.model.Region> getAllRegions()
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -10,12 +10,11 @@ import ru.kotikov.service.FarmerLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.List;
 
 public class FarmersPortlet extends MVCPortlet {
 
@@ -30,12 +29,15 @@ public class FarmersPortlet extends MVCPortlet {
             farmer.setFarmerOgrn(ParamUtil.getLong(request, "farmerOgrn"));
             farmer.setFarmerRegistrationRegionId(ParamUtil.getLong(request, "farmerRegistrationRegionId"));
 
-            SimpleDateFormat format = new SimpleDateFormat();
-            format.applyPattern("MM.dd.yy");
-            farmer.setFarmerRegistrationDate(format.parse
-                    (ParamUtil.getString(request, "farmerRegistrationDate")));
-
+            SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+            if (!(ParamUtil.getString(request, "farmerRegistrationDate")).equals("")) {
+                farmer.setFarmerRegistrationDate(format.parse
+                        (ParamUtil.getString(request, "farmerRegistrationDate")));
+            } else farmer.setFarmerRegistrationDate(null);
             farmer.setFarmerArchiveStatus(ParamUtil.getBoolean(request, "farmerArchiveStatus"));
+
+
+
             FarmerLocalServiceUtil.addFarmer(farmer);
             response.setRenderParameter("jspPage", "/farmersView.jsp");
         } catch (Exception e) {
@@ -52,8 +54,7 @@ public class FarmersPortlet extends MVCPortlet {
         farmer.setFarmerOgrn(ParamUtil.getLong(request, "farmerOgrn"));
         farmer.setFarmerRegistrationRegionId(ParamUtil.getLong(request, "farmerRegistrationRegionId"));
 
-        SimpleDateFormat format = new SimpleDateFormat();
-        format.applyPattern("MM.dd.yy");
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         try {
             farmer.setFarmerRegistrationDate(format.parse(ParamUtil.getString(request, "farmerRegistrationDate")));
         } catch (ParseException e) {
@@ -62,7 +63,7 @@ public class FarmersPortlet extends MVCPortlet {
 
         farmer.setFarmerArchiveStatus(ParamUtil.getBoolean(request, "archiveStatus"));
         FarmerLocalServiceUtil.updateFarmer(farmer);
-        response.setRenderParameter("jspPage", "/html/farmers/farmersView.jsp");
+        response.setRenderParameter("jspPage", "/farmersView.jsp");
     }
 
     public void changeFarmerArchiveStatus(ActionRequest request, ActionResponse response) throws SystemException, PortalException {
@@ -76,5 +77,44 @@ public class FarmersPortlet extends MVCPortlet {
         Farmer currentFarmer = FarmerLocalServiceUtil.getFarmer(Long.parseLong(request.getParameter("currentFarmerId")));
         request.setAttribute("currentFarmer", currentFarmer);
         response.setRenderParameter("jspPage", "/html/farmers/updateFarmer.jsp");
+    }
+
+    public void filterFarmer(ActionRequest request, ActionResponse response) throws SystemException {
+        List<Farmer> resultList = new ArrayList<Farmer>();
+        List<Farmer> farmerList = FarmerLocalServiceUtil.getAllFarmers();
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        Date starDate, endDate;
+        try {
+            if (!(ParamUtil.getString(request, "startRegistrationDate")).equals("")) {
+                starDate = (format.parse(ParamUtil.getString(request, "startRegistrationDate")));
+            } else {
+                starDate = null;
+            }
+            if (!(ParamUtil.getString(request, "endRegistrationDate")).equals("")) {
+                endDate = (format.parse(ParamUtil.getString(request, "endRegistrationDate")));
+            } else {
+                endDate = null;
+            }
+
+            for (Farmer farmer : farmerList) {
+                if (
+                        ((ParamUtil.getString(request, "searchFarmerName")).equals("")
+                                || farmer.getFarmerName().equalsIgnoreCase(ParamUtil.getString(request, "searchFarmerName")))
+                                && (ParamUtil.getLong(request, "searchFarmerInn") == 0
+                                || farmer.getFarmerInn() == ParamUtil.getLong(request, "searchFarmerInn"))
+                                && (ParamUtil.getLong(request, "searchFarmerRegistrationRegionId") == 0
+                                || farmer.getFarmerRegistrationRegionId() == ParamUtil.getLong(request, "searchFarmerRegistrationRegionId"))
+                                && (starDate == null || farmer.getFarmerRegistrationDate().after(starDate))
+                                && (endDate == null || farmer.getFarmerRegistrationDate().before(endDate))
+                                && (farmer.getFarmerArchiveStatus() == ParamUtil.getBoolean(request, "searchFarmerArchiveStatus"))
+                ) {
+                    resultList.add(farmer);
+                }
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        request.setAttribute("resultList", resultList);
+        response.setRenderParameter("jspPage", "/html/farmers/filterFarmers.jsp");
     }
 }

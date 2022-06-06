@@ -429,6 +429,12 @@ public class RegionLocalServiceWrapper implements RegionLocalService,
         return _regionLocalService.getByRegionArchiveStatus(archive);
     }
 
+    @Override
+    public java.util.List<ru.kotikov.model.Region> getAllRegions()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _regionLocalService.getAllRegions();
+    }
+
     /**
      * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
      */

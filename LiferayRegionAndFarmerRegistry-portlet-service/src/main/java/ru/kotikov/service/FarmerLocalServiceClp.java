@@ -82,6 +82,8 @@ public class FarmerLocalServiceClp implements FarmerLocalService {
     private String[] _methodParameterTypes36;
     private String _methodName37;
     private String[] _methodParameterTypes37;
+    private String _methodName38;
+    private String[] _methodParameterTypes38;
 
     public FarmerLocalServiceClp(InvokableLocalService invokableLocalService) {
         _invokableLocalService = invokableLocalService;
@@ -248,6 +250,10 @@ public class FarmerLocalServiceClp implements FarmerLocalService {
         _methodName37 = "getFarmersRegions";
 
         _methodParameterTypes37 = new String[] { "long" };
+
+        _methodName38 = "getAllFarmers";
+
+        _methodParameterTypes38 = new String[] {  };
     }
 
     @Override
@@ -1235,5 +1241,31 @@ public class FarmerLocalServiceClp implements FarmerLocalService {
         }
 
         return (java.util.List<ru.kotikov.model.Region>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    @Override
+    public java.util.List<ru.kotikov.model.Farmer> getAllFarmers()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        try {
+            returnObj = _invokableLocalService.invokeMethod(_methodName38,
+                    _methodParameterTypes38, new Object[] {  });
+        } catch (Throwable t) {
+            t = ClpSerializer.translateThrowable(t);
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<ru.kotikov.model.Farmer>) ClpSerializer.translateOutput(returnObj);
     }
 }

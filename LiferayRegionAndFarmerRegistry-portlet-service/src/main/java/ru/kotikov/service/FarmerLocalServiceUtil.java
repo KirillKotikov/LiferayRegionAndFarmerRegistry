@@ -1,7 +1,6 @@
 package ru.kotikov.service;
 
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.InvokableLocalService;
 
@@ -413,6 +412,11 @@ public class FarmerLocalServiceUtil {
         long farmerId)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getService().getFarmersRegions(farmerId);
+    }
+
+    public static java.util.List<ru.kotikov.model.Farmer> getAllFarmers()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getAllFarmers();
     }
 
     public static void clearService() {

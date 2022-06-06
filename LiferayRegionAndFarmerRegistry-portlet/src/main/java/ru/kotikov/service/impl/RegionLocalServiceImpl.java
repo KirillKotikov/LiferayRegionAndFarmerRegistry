@@ -1,6 +1,7 @@
 package ru.kotikov.service.impl;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import ru.kotikov.model.Farmer;
 import ru.kotikov.model.Region;
 import ru.kotikov.service.base.RegionLocalServiceBaseImpl;
 
@@ -32,5 +33,9 @@ public class RegionLocalServiceImpl extends RegionLocalServiceBaseImpl {
 
     public List<Region> getByRegionArchiveStatus(boolean archive) throws SystemException {
         return regionPersistence.findByRegionArchiveStatus(archive);
+    }
+
+    public List<Region> getAllRegions() throws SystemException {
+        return regionPersistence.findAll();
     }
 }

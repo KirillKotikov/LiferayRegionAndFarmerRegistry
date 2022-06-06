@@ -81,6 +81,8 @@ public class RegionLocalServiceClpInvoker {
     private String[] _methodParameterTypes58;
     private String _methodName59;
     private String[] _methodParameterTypes59;
+    private String _methodName60;
+    private String[] _methodParameterTypes60;
 
     public RegionLocalServiceClpInvoker() {
         _methodName0 = "addRegion";
@@ -241,6 +243,10 @@ public class RegionLocalServiceClpInvoker {
         _methodName59 = "getByRegionArchiveStatus";
 
         _methodParameterTypes59 = new String[] { "boolean" };
+
+        _methodName60 = "getAllRegions";
+
+        _methodParameterTypes60 = new String[] {  };
     }
 
     public Object invokeMethod(String name, String[] parameterTypes,
@@ -467,6 +473,11 @@ public class RegionLocalServiceClpInvoker {
         if (_methodName59.equals(name) &&
                 Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
             return RegionLocalServiceUtil.getByRegionArchiveStatus(((Boolean) arguments[0]).booleanValue());
+        }
+
+        if (_methodName60.equals(name) &&
+                Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+            return RegionLocalServiceUtil.getAllRegions();
         }
 
         throw new UnsupportedOperationException();

@@ -49,6 +49,6 @@ public class RegionsPortlet extends MVCPortlet {
     public void getCurrentRegion(ActionRequest request, ActionResponse response) throws SystemException, PortalException {
         Region currentRegion = RegionLocalServiceUtil.getRegion(Long.parseLong(request.getParameter("currentRegionId")));
         request.setAttribute("currentRegion", currentRegion);
-        response.setRenderParameter("jspPage", "/html/regions/updateFarmer.jsp");
+        response.setRenderParameter("jspPage", "/html/regions/updateRegion.jsp");
     }
 }

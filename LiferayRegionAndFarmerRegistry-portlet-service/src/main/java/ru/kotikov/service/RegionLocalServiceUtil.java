@@ -408,6 +408,11 @@ public class RegionLocalServiceUtil {
         return getService().getByRegionArchiveStatus(archive);
     }
 
+    public static java.util.List<ru.kotikov.model.Region> getAllRegions()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getAllRegions();
+    }
+
     public static void clearService() {
         _service = null;
     }

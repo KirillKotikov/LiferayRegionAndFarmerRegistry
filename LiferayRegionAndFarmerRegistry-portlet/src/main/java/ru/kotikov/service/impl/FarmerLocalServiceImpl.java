@@ -38,4 +38,8 @@ public class FarmerLocalServiceImpl extends FarmerLocalServiceBaseImpl {
     public List<Region> getFarmersRegions(long farmerId) throws SystemException {
         return farmerPersistence.getRegions(farmerId);
     }
+
+    public List<Farmer> getAllFarmers() throws SystemException {
+        return farmerPersistence.findAll();
+    }
 }

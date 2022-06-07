@@ -8,6 +8,7 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 import ru.kotikov.model.Farmer;
 import ru.kotikov.service.FarmerLocalServiceUtil;
 import ru.kotikov.service.RegionLocalServiceUtil;
+import utils.FarmerFinderUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -86,10 +87,9 @@ public class FarmersPortlet extends MVCPortlet {
         response.setRenderParameter("jspPage", "/html/farmers/updateFarmer.jsp");
     }
 
-    //    Мне очень стыдно за этот метод, но он работает. Я обязательно разберусь как сделать DynamicQuery :D
     public void filterFarmer(ActionRequest request, ActionResponse response) throws SystemException {
-        List<Farmer> resultList = new ArrayList<Farmer>();
-        List<Farmer> farmerList = FarmerLocalServiceUtil.getAllFarmers();
+
+        List<Farmer> resultList = null;
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         Date starDate, endDate;
         try {
@@ -103,26 +103,19 @@ public class FarmersPortlet extends MVCPortlet {
             } else {
                 endDate = null;
             }
-            for (Farmer farmer : farmerList) {
-                if (
-                        ((ParamUtil.getString(request, "searchFarmerName")).equals("")
-                                || farmer.getFarmerName().equalsIgnoreCase(ParamUtil.getString(request, "searchFarmerName")))
-                                && (ParamUtil.getLong(request, "searchFarmerInn") == 0
-                                || farmer.getFarmerInn() == ParamUtil.getLong(request, "searchFarmerInn"))
-                                && (ParamUtil.getString(request, "searchFarmerRegistrationRegionName").equals("")
-                                || farmer.getFarmerRegistrationRegionName().equals(ParamUtil.getString(request, "searchFarmerRegistrationRegionName")))
-                                && (starDate == null || farmer.getFarmerRegistrationDate().after(starDate))
-                                && (endDate == null || farmer.getFarmerRegistrationDate().before(endDate))
-                                && (ParamUtil.getString(request, "searchFarmerArchiveStatus").equals("any"))
-                                || (farmer.getFarmerArchiveStatus() == ParamUtil.getBoolean(request, "searchFarmerArchiveStatus"))
-                ) {
-                    resultList.add(farmer);
-                }
-            }
+            resultList = FarmerFinderUtil.getFarmersWithFilters(
+                    ParamUtil.getString(request, "searchFarmerName"),
+                    ParamUtil.getLong(request, "searchFarmerInn"),
+                    ParamUtil.getString(request, "searchFarmerRegistrationRegionName"),
+                    starDate,
+                    endDate,
+                    ParamUtil.getString(request, "searchFarmerArchiveStatus")
+            );
         } catch (ParseException e) {
             e.printStackTrace();
         }
         request.setAttribute("resultList", resultList);
         response.setRenderParameter("jspPage", "/html/farmers/filterFarmers.jsp");
     }
+
 }

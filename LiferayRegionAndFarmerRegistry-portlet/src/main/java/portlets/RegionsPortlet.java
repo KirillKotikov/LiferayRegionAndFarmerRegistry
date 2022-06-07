@@ -1,6 +1,5 @@
 package portlets;
 
-import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;

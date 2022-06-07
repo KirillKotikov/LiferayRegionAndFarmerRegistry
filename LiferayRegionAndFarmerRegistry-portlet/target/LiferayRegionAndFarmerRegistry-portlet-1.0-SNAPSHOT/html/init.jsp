@@ -9,5 +9,5 @@
 <%@ page import="ru.kotikov.model.Farmer" %>
 <%@ page import="ru.kotikov.service.RegionLocalServiceUtil" %>
 <%@ page import="ru.kotikov.service.FarmerLocalServiceUtil" %>
-<portlet:defineObjects/>
+
 

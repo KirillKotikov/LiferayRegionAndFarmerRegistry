@@ -8,7 +8,7 @@
 <portlet:actionURL name="addFarmer" var="addFarmerUrl"/>
 
 <aui:form name="addFarmerForm" action="<%= addFarmerUrl %>" method="post">
-    <aui:fieldset>
+    <aui:fieldset label="Adding new farmer">
         <aui:input name="farmerName" value="" label="Farmer name">
             <aui:validator name="required" errorMessage="Farmer name cannot be empty!"/>
         </aui:input>
@@ -27,13 +27,15 @@
             <aui:validator name="rangeLength" errorMessage="OGRN consists of 13 digits!">[13,13]</aui:validator>
         </aui:input>
         <aui:select name="farmerRegistrationRegionName" label="Registration region name">
+            <aui:option label="" value=""/>
             <%
                 for (Region region : regionList) {
             %>
             <aui:option label="<%=region.getRegionName()%>" value="<%=region.getRegionName()%>"/>
             <%}%>
         </aui:select>
-        <aui:select name="farmerFieldsRegions" label="Fields regions" multiple="true">
+        <aui:select name="farmerFieldsRegions" label="Fields regions" size="3" multiple="true">
+            <aui:option label="" value=""/>
             <%
                 for (Region region : regionList) {
             %>

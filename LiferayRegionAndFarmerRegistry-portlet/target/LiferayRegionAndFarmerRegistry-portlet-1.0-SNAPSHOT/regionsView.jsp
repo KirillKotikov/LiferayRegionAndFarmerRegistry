@@ -12,7 +12,6 @@
     <liferay-ui:search-container-row
             className="ru.kotikov.model.Region" modelVar="region">
         <liferay-ui:search-container-column-jsp path="/html/regions/buttons/regionUpdate.jsp" align="left"/>
-        <liferay-ui:search-container-column-text property="regionId" name="Region id"/>
         <liferay-ui:search-container-column-text property="regionName" name="Region name"/>
         <liferay-ui:search-container-column-text property="regionCode" name="Region codes"/>
         <liferay-ui:search-container-column-jsp path="/html/regions/buttons/changeArchiveStatus.jsp" align="right"/>

@@ -20,7 +20,6 @@ import java.util.List;
 public class FarmersPortlet extends MVCPortlet {
 
     public void addFarmer(ActionRequest request, ActionResponse response) {
-
         try {
             Farmer farmer = FarmerLocalServiceUtil.createFarmer(CounterLocalServiceUtil.increment());
             farmer.setFarmerName(ParamUtil.getString(request, "farmerName"));
@@ -35,7 +34,12 @@ public class FarmersPortlet extends MVCPortlet {
                         (ParamUtil.getString(request, "farmerRegistrationDate")));
             } else farmer.setFarmerRegistrationDate(null);
             farmer.setFarmerArchiveStatus(ParamUtil.getBoolean(request, "farmerArchiveStatus"));
-            RegionLocalServiceUtil.setFarmerRegions(farmer.getFarmerId(), ParamUtil.getLongValues(request, "farmerFieldsRegions"));
+            String[] fieldsRegions = ParamUtil.getParameterValues(request, "farmerFieldsRegions");
+            long[] fieldsRegionsId = new long[fieldsRegions.length];
+            for (int i = 0; i < fieldsRegions.length; i++) {
+                fieldsRegionsId[i] = RegionLocalServiceUtil.getByRegionName(fieldsRegions[i]).get(0).getRegionId();
+            }
+            RegionLocalServiceUtil.setFarmerRegions(farmer.getFarmerId(), fieldsRegionsId);
             FarmerLocalServiceUtil.addFarmer(farmer);
             response.setRenderParameter("jspPage", "/farmersView.jsp");
         } catch (Exception e) {
@@ -51,14 +55,19 @@ public class FarmersPortlet extends MVCPortlet {
         farmer.setFarmerKpp(ParamUtil.getLong(request, "farmerKpp"));
         farmer.setFarmerOgrn(ParamUtil.getLong(request, "farmerOgrn"));
         farmer.setFarmerRegistrationRegionName(ParamUtil.getString(request, "farmerRegistrationRegionName"));
-
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         try {
             farmer.setFarmerRegistrationDate(format.parse(ParamUtil.getString(request, "farmerRegistrationDate")));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        String[] fieldsRegions = ParamUtil.getParameterValues(request, "farmerFieldsRegions");
+        long[] fieldsRegionsId = new long[fieldsRegions.length];
+        for (int i = 0; i < fieldsRegions.length; i++) {
+            fieldsRegionsId[i] = RegionLocalServiceUtil.getByRegionName(fieldsRegions[i]).get(0).getRegionId();
+        }
+        RegionLocalServiceUtil.clearFarmerRegions(farmer.getFarmerId());
+        RegionLocalServiceUtil.setFarmerRegions(farmer.getFarmerId(), fieldsRegionsId);
         farmer.setFarmerArchiveStatus(ParamUtil.getBoolean(request, "archiveStatus"));
         FarmerLocalServiceUtil.updateFarmer(farmer);
         response.setRenderParameter("jspPage", "/farmersView.jsp");
@@ -77,6 +86,7 @@ public class FarmersPortlet extends MVCPortlet {
         response.setRenderParameter("jspPage", "/html/farmers/updateFarmer.jsp");
     }
 
+    //    Мне очень стыдно за этот метод, но он работает. Я обязательно разберусь как сделать DynamicQuery :D
     public void filterFarmer(ActionRequest request, ActionResponse response) throws SystemException {
         List<Farmer> resultList = new ArrayList<Farmer>();
         List<Farmer> farmerList = FarmerLocalServiceUtil.getAllFarmers();
@@ -93,7 +103,6 @@ public class FarmersPortlet extends MVCPortlet {
             } else {
                 endDate = null;
             }
-
             for (Farmer farmer : farmerList) {
                 if (
                         ((ParamUtil.getString(request, "searchFarmerName")).equals("")
@@ -104,7 +113,8 @@ public class FarmersPortlet extends MVCPortlet {
                                 || farmer.getFarmerRegistrationRegionName().equals(ParamUtil.getString(request, "searchFarmerRegistrationRegionName")))
                                 && (starDate == null || farmer.getFarmerRegistrationDate().after(starDate))
                                 && (endDate == null || farmer.getFarmerRegistrationDate().before(endDate))
-                                && (farmer.getFarmerArchiveStatus() == ParamUtil.getBoolean(request, "searchFarmerArchiveStatus"))
+                                && (ParamUtil.getString(request, "searchFarmerArchiveStatus").equals("any"))
+                                || (farmer.getFarmerArchiveStatus() == ParamUtil.getBoolean(request, "searchFarmerArchiveStatus"))
                 ) {
                     resultList.add(farmer);
                 }

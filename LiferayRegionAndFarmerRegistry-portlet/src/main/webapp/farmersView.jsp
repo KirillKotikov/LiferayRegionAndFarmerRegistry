@@ -18,6 +18,7 @@
         <aui:validator name="rangeLength" errorMessage="INN consists of 12 digits!">[12,12]</aui:validator>
     </aui:input>
     <aui:select name="searchFarmerRegistrationRegionName" label="Registration region name">
+        <aui:option label="" value=""/>
         <%
             for (Region region : regionList) {
         %>
@@ -31,27 +32,26 @@
     </div>
     <aui:script>
         YUI().use(
-        'aui-datepicker',
-        function(Y) {
-        new Y.DatePicker(
-        {
-        trigger: '#date input',
-        mask: '%d.%m.%Y',
-        calendar: {
-        selectionMode: 'multiple'
-        },
-        popover: {
-        zIndex: 1
-        },
-        panes: 2
-        }
+            'aui-datepicker', function(Y) {
+                new Y.DatePicker(
+                    {
+                        trigger: '#date input', mask: '%d.%m.%Y', calendar: {
+                            selectionMode: 'multiple'
+                        },
+                        popover: {
+                            zIndex: 1
+                        },
+                        panes: 2
+                    }
+                );
+            }
         );
-        }
-        );</aui:script>
+    </aui:script>
     <label>Archive status:
-        <aui:input name="searchFarmerArchiveStatus" type="radio" label="true" value="true"> </aui:input>
-        <aui:input name="searchFarmerArchiveStatus" type="radio" label="false" value="false"
+        <aui:input name="searchFarmerArchiveStatus" type="radio" label="Any" value="any"
                    checked="true"> </aui:input>
+        <aui:input name="searchFarmerArchiveStatus" type="radio" label="True" value="true"/>
+        <aui:input name="searchFarmerArchiveStatus" type="radio" label="False" value="false"/>
     </label>
     <aui:button type="submit" name="Search" value="Search"/>
 </aui:form>
@@ -70,6 +70,17 @@
         <liferay-ui:search-container-column-text property="farmerOgrn" name="OGRN"/>
         <liferay-ui:search-container-column-text property="farmerRegistrationRegionName"
                                                  name="Registration region name"/>
+        <%--         Класса Joiner нет в jdk 1.7 :D--%>
+        <%
+            List<Region> regions = RegionLocalServiceUtil.getFarmerRegions(farmer.getFarmerId());
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < regions.size(); i++) {
+                if (i == regions.size() - 1) {
+                    builder.append(regions.get(i).getRegionName()).append(".");
+                } else builder.append(regions.get(i).getRegionName()).append(", ");
+            }
+        %>
+        <liferay-ui:search-container-column-text value="<%=builder.toString()%>" name="Fields regions"/>
         <liferay-ui:search-container-column-text property="farmerRegistrationDate" name="Registration date"/>
         <liferay-ui:search-container-column-text property="farmerArchiveStatus" name="Farmer archive status"/>
         <liferay-ui:search-container-column-jsp path="/html/farmers/buttons/changeArchiveStatus.jsp" align="right"/>

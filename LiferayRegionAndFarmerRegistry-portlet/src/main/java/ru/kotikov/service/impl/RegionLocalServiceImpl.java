@@ -1,7 +1,6 @@
 package ru.kotikov.service.impl;
 
 import com.liferay.portal.kernel.exception.SystemException;
-import ru.kotikov.model.Farmer;
 import ru.kotikov.model.Region;
 import ru.kotikov.service.base.RegionLocalServiceBaseImpl;
 

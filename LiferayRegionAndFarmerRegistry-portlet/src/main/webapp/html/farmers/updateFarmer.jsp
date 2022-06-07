@@ -30,7 +30,8 @@
             <aui:validator name="digits" errorMessage="OGRN consists of 13 digits!"/>
             <aui:validator name="rangeLength" errorMessage="OGRN consists of 13 digits!">[13,13]</aui:validator>
         </aui:input>
-        <aui:select name="farmerRegistrationRegionId" label="Registration region id">
+        <aui:select name="farmerRegistrationRegionName" label="Registration region name">
+            <aui:option label="" value=""/>
             <%
                 for (Region region : regionList) {
                     boolean selected = currentFarmer.getFarmerRegistrationRegionName().equals(region.getRegionName());
@@ -39,10 +40,11 @@
                         selected="<%=selected %>"/>
             <%}%>
         </aui:select>
-        <aui:select name="farmerFieldsRegions" label="Fields regions" multiple="true">
+        <aui:select name="farmerFieldsRegions" label="Fields regions" size="3" multiple="true">
+            <aui:option label="" value=""/>
             <%
                 for (Region region : regionList) {
-                    boolean selected = currentFarmer.getFarmerRegistrationRegionName().equals(region.getRegionName());
+                    boolean selected = RegionLocalServiceUtil.getFarmerRegions(currentFarmer.getFarmerId()).contains(region);
             %>
             <aui:option label="<%=region.getRegionName()%>" value="<%=region.getRegionName()%>"
                         selected="<%=selected %>"/>

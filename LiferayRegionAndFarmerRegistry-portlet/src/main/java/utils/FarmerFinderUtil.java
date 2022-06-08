@@ -3,15 +3,18 @@ package utils;
 import com.liferay.portal.kernel.dao.orm.Conjunction;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Session;
 import ru.kotikov.model.Farmer;
 import ru.kotikov.service.FarmerLocalServiceUtil;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 public class FarmerFinderUtil {
-    public static List<Farmer> getFarmersWithFilters(String farmerName, Long farmerInn, String registrationRegionName,
+
+    public static List<Farmer> getFarmersWithFilters(String farmerName, Long farmerInn, String registrationRegionName, String fieldName,
                                                      Date afterRegistrationDate, Date beforeRegistrationDate, String archiveStatus) {
 
         List<Farmer> farmers = Collections.emptyList();
@@ -29,6 +32,15 @@ public class FarmerFinderUtil {
 
             if (!registrationRegionName.equals("")) {
                 conjunction.add(RestrictionsFactoryUtil.eq("farmerRegistrationRegionName", registrationRegionName));
+            }
+
+            if (!fieldName.equals("")) {
+                conjunction.add(RestrictionsFactoryUtil.sqlRestriction(
+                        "(farmer_id IN (SELECT ef.farmer_id FROM entity_farmer ef \n" +
+                                "JOIN entity_regions_farmers erf ON ef.farmer_id = erf.farmer_id \n" +
+                                "JOIN entity_region er ON erf.region_id = er.region_id \n" +
+                                "WHERE er.region_name = '" + fieldName + "'))"
+                ));
             }
 
             if (afterRegistrationDate != null) {

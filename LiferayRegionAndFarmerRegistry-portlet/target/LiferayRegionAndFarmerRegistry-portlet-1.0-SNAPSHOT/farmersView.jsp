@@ -25,6 +25,14 @@
         <aui:option label="<%=region.getRegionName()%>" value="<%=region.getRegionName()%>"/>
         <%}%>
     </aui:select>
+    <aui:select name="searchFarmerFieldRegionName" label="Field region name">
+        <aui:option label="" value=""/>
+        <%
+            for (Region region : regionList) {
+        %>
+        <aui:option label="<%=region.getRegionName()%>" value="<%=region.getRegionName()%>"/>
+        <%}%>
+    </aui:select>
     <div id="date">
         <aui:input readonly="true" name="startRegistrationDate" label="Registration start date:"
                    placeholder="dd.mm.yyyy"/>

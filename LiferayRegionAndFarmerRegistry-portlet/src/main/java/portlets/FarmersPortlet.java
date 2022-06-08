@@ -107,6 +107,7 @@ public class FarmersPortlet extends MVCPortlet {
                     ParamUtil.getString(request, "searchFarmerName"),
                     ParamUtil.getLong(request, "searchFarmerInn"),
                     ParamUtil.getString(request, "searchFarmerRegistrationRegionName"),
+                    ParamUtil.getString(request, "searchFarmerFieldRegionName"),
                     starDate,
                     endDate,
                     ParamUtil.getString(request, "searchFarmerArchiveStatus")

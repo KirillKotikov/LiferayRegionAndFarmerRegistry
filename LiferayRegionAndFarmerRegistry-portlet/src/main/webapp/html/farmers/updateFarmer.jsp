@@ -7,10 +7,17 @@
 <%
     List<Region> regionList = RegionLocalServiceUtil.getAllRegions();
     SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-    String currentDate;
+    String currentDate, currentKpp, curentOgrn;
     if (currentFarmer.getFarmerRegistrationDate() != null) {
         currentDate = format.format(currentFarmer.getFarmerRegistrationDate());
     } else currentDate = "";
+    if (currentFarmer.getFarmerKpp() == 0) {
+        currentKpp = "";
+    } else currentKpp = String.valueOf(currentFarmer.getFarmerKpp());
+    if (currentFarmer.getFarmerOgrn() == 0) {
+        curentOgrn = "";
+    } else curentOgrn = String.valueOf(currentFarmer.getFarmerKpp());
+
 %>
 
 <portlet:actionURL name="updateFarmer" var="updateFarmerUrl"/>
@@ -26,11 +33,11 @@
             <aui:validator name="digits" errorMessage="INN consists of 12 digits!"/>
             <aui:validator name="rangeLength" errorMessage="INN consists of 12 digits!">[12,12]</aui:validator>
         </aui:input>
-        <aui:input name="farmerKpp" label="KPP" value="<%= currentFarmer.getFarmerKpp() %>">
+        <aui:input name="farmerKpp" label="KPP" value="<%= currentKpp %>">
             <aui:validator name="digits" errorMessage="KPP consists of 9 digits!"/>
             <aui:validator name="rangeLength" errorMessage="KPP consists of 9 digits!">[9,9]</aui:validator>
         </aui:input>
-        <aui:input name="farmerOgrn" label="OGRN" value="<%= currentFarmer.getFarmerOgrn() %>">
+        <aui:input name="farmerOgrn" label="OGRN" value="<%= curentOgrn %>">
             <aui:validator name="digits" errorMessage="OGRN consists of 13 digits!"/>
             <aui:validator name="rangeLength" errorMessage="OGRN consists of 13 digits!">[13,13]</aui:validator>
         </aui:input>

@@ -6,8 +6,12 @@
 
 <%
     List<Region> regionList = RegionLocalServiceUtil.getAllRegions();
+    SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+    String currentDate;
+    if (currentFarmer.getFarmerRegistrationDate() != null) {
+        currentDate = format.format(currentFarmer.getFarmerRegistrationDate());
+    } else currentDate = "";
 %>
-<% SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");%>
 
 <portlet:actionURL name="updateFarmer" var="updateFarmerUrl"/>
 <aui:form action="<%= updateFarmerUrl %>">
@@ -52,7 +56,7 @@
         </aui:select>
         <div id="date">
             <aui:input readonly="true" name="farmerRegistrationDate" label="Registration date" placeholder="dd.mm.yyyy"
-                       value="<%= format.format(currentFarmer.getFarmerRegistrationDate()) %>"/>
+                       value="<%=currentDate%>"/>
         </div>
         <aui:script>
             YUI().use(
